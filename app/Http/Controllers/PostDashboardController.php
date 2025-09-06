@@ -17,11 +17,11 @@ class PostDashboardController extends Controller
     {
         $posts = Post::latest()->where('author_id', Auth::user()->id);
 
-        if(request('keyword')){
+        if (request('keyword')) {
             $posts->where('title', 'like', '%' . request('keyword') . '%');
         }
 
-        return view('dashboard.index', ['posts'=> $posts->paginate(5)->withQueryString()]);
+        return view('dashboard.index', ['posts' => $posts->paginate(5)->withQueryString()]);
     }
 
     /**
@@ -47,11 +47,12 @@ class PostDashboardController extends Controller
         Validator::make($request->all(), [
             'title' => 'required|unique:posts|min:4|max:255',
             'category_id' => 'required',
-            'body' => 'required'
+            'body' => 'required|min:20'
         ], [
             'title.required' => 'Field :attribute harus diisi',
             'category_id.required' => 'Pilih salah satu :attribute',
-            'body.required' => ':attribute ga boleh kosong'
+            'body.required' => ':attribute ga boleh kosong',
+            'body.min' => ':attribute minimal harus :min karakter atau lebih'
         ], [
             'title' => 'judul',
             'category_id' => 'kategori',
@@ -61,12 +62,12 @@ class PostDashboardController extends Controller
         Post::create([
             'title' => $request->title,
             'author_id' => Auth::user()->id,
-            'category_id' =>$request->category_id,
+            'category_id' => $request->category_id,
             'slug' => Str::slug($request->title),
             'body' => $request->body
         ]);
 
-        return redirect('/dashboard')->with(['success'=> 'your post has been saved!']);
+        return redirect('/dashboard')->with(['success' => 'your post has been saved!']);
     }
 
     /**
@@ -74,30 +75,45 @@ class PostDashboardController extends Controller
      */
     public function show(Post $post)
     {
-        return view('dashboard.show', ['post'=> $post]);
+        return view('dashboard.show', ['post' => $post]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        //
+        return view('dashboard.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:4|max:255|unique:posts,title,' . $post->id,
+            'category_id' => 'required',
+            'body' => 'required'
+        ]);
+
+        $post->update([
+            'title' => $request->title,
+            'author_id' => Auth::user()->id,
+            'category_id' => $request->category_id,
+            'slug' => Str::slug($request->title),
+            'body' => $request->body
+        ]);
+
+        return redirect('/dashboard')->with(['success' => 'your post has been updated!']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect('/dashboard')->with(['success' => 'your post has been removed!']);
     }
 }

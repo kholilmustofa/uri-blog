@@ -11,7 +11,7 @@
                     <address class="flex items-center mb-6 not-italic">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                             <img class="mr-4 w-16 h-16 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                src="{{ $post->author->avatar ? asset('storage/' . $post->author->avatar) : asset('img/avatar.png') }}"
                                 alt="{{ $post->author->name }}">
                             <div>
                                 <a href="/posts?author={{ $post->author->username }}" rel="author"
@@ -30,7 +30,7 @@
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                         {{ $post['title'] }}</h1>
                 </header>
-                <p>{{$post['body']}}</p>
+                <p>{!! $post['body'] !!}</p>
 
             </article>
         </div>
