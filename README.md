@@ -1,61 +1,294 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Uri Blog - Semantic Web Blog Application
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-11.x-red?style=for-the-badge&logo=laravel" alt="Laravel">
+  <img src="https://img.shields.io/badge/Semantic_Web-OWL-blue?style=for-the-badge" alt="Semantic Web">
+  <img src="https://img.shields.io/badge/Protégé-5.6-green?style=for-the-badge" alt="Protégé">
+  <img src="https://img.shields.io/badge/Apache_Jena-Fuseki-orange?style=for-the-badge" alt="Fuseki">
 </p>
 
-## About Laravel
+## 📖 Tentang Project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Uri Blog** adalah aplikasi blog berbasis Laravel yang diintegrasikan dengan teknologi **Semantic Web**. Project ini dibuat sebagai tugas kuliah Web Semantic yang menggabungkan pengembangan web modern dengan konsep knowledge graph dan ontologi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🎯 Tujuan Project
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Membangun aplikasi blog fungsional dengan Laravel
+2. Membuat ontologi OWL untuk domain blog
+3. Mengimplementasikan Semantic Web dengan triple store
+4. Menyediakan SPARQL endpoint untuk query semantic data
+5. Mendemonstrasikan integrasi web tradisional dengan Semantic Web
 
-## Learning Laravel
+## ✨ Fitur Utama
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Web Application (Laravel)
+- ✅ **Authentication & Authorization** - Login, register, dan manajemen user
+- ✅ **CRUD Posts** - Create, read, update, delete artikel blog
+- ✅ **Categories & Tags** - Kategorisasi artikel
+- ✅ **Author Management** - Profil penulis
+- ✅ **Responsive Design** - Mobile-friendly dengan Tailwind CSS
+- ✅ **Semantic HTML5** - Struktur HTML yang semantic
+- ✅ **SEO Optimized** - Meta tags dan Schema.org markup
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Semantic Web Features
+- ✅ **OWL Ontology** - Ontologi lengkap untuk domain blog
+- ✅ **RDF Data** - Data dalam format RDF/Turtle
+- ✅ **Triple Store** - Apache Jena Fuseki integration
+- ✅ **SPARQL Endpoint** - Query interface untuk semantic data
+- ✅ **Knowledge Graph** - Representasi relasi antar entitas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🏗️ Teknologi yang Digunakan
 
-## Laravel Sponsors
+### Backend
+- **Laravel 11.x** - PHP Framework
+- **MySQL** - Relational Database
+- **PHP 8.2+** - Programming Language
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Frontend
+- **Blade Templates** - Laravel templating engine
+- **Tailwind CSS** - Utility-first CSS framework
+- **Alpine.js** - Lightweight JavaScript framework
+- **Flowbite** - UI components
 
-### Premium Partners
+### Semantic Web Stack
+- **Protégé 5.6** - Ontology editor
+- **Apache Jena Fuseki** - Triple store & SPARQL server
+- **OWL 2** - Web Ontology Language
+- **RDF/Turtle** - Data serialization formats
+- **SPARQL 1.1** - Query language
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📁 Struktur Project
 
-## Contributing
+```
+uri-blog/
+├── app/                    # Laravel application code
+├── database/              # Migrations, seeders, factories
+├── public/                # Public assets
+├── resources/
+│   ├── views/            # Blade templates (Semantic HTML5)
+│   └── css/              # Stylesheets
+├── routes/               # Web routes
+├── ontology/             # 🧠 Semantic Web Files
+│   ├── uri-blog-ontology.owl      # OWL Ontology
+│   ├── uri-blog-instances.ttl     # Sample RDF data
+│   ├── README.md                  # Ontology documentation
+│   ├── SETUP-TRIPLE-STORE.md      # Fuseki setup guide
+│   └── SPARQL-QUERIES.md          # Query examples
+└── README.md             # This file
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🚀 Instalasi & Setup
 
-## Code of Conduct
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js & NPM
+- MySQL
+- Java 17+ (untuk Fuseki)
+- Apache Jena Fuseki
+- Protégé (opsional, untuk editing ontology)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Clone Repository
+```bash
+git clone https://github.com/kholilmustofa/uri-blog.git
+cd uri-blog
+```
 
-## Security Vulnerabilities
+### 2. Install Dependencies
+```bash
+# Install PHP dependencies
+composer install
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Install Node dependencies
+npm install
+```
 
-## License
+### 3. Environment Setup
+```bash
+# Copy environment file
+cp .env.example .env
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Generate application key
+php artisan key:generate
+
+# Configure database di .env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=uriblog
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4. Database Migration
+```bash
+# Run migrations
+php artisan migrate
+
+# Seed database (optional)
+php artisan db:seed
+```
+
+### 5. Build Assets
+```bash
+npm run dev
+```
+
+### 6. Run Application
+```bash
+php artisan serve
+```
+
+Buka browser: http://127.0.0.1:8000
+
+## 🧠 Setup Semantic Web (Triple Store)
+
+### 1. Install Apache Jena Fuseki
+- Download dari: https://jena.apache.org/download/
+- Extract ke folder (misal: `C:\fuseki`)
+
+### 2. Jalankan Fuseki Server
+```bash
+cd C:\fuseki\apache-jena-fuseki-5.6.0
+fuseki-server.bat
+```
+
+### 3. Akses Fuseki Web Interface
+Buka browser: http://localhost:3030
+
+### 4. Upload Ontology
+1. Buat dataset baru: `uriblog`
+2. Upload file:
+   - `ontology/uri-blog-ontology.owl`
+   - `ontology/uri-blog-instances.ttl`
+
+### 5. Test SPARQL Query
+```sparql
+PREFIX : <http://www.uriblog.com/ontology#>
+
+SELECT ?post ?title ?authorName
+WHERE {
+  ?post rdf:type :Post .
+  ?post :postTitle ?title .
+  ?post :hasAuthor ?author .
+  ?author :authorName ?authorName .
+}
+```
+
+📚 **Dokumentasi lengkap**: Lihat `ontology/SETUP-TRIPLE-STORE.md`
+
+## 📊 Ontologi Uri Blog
+
+### Classes
+- **Blog** - Representasi website blog
+- **Post** - Artikel blog
+- **Author** - Penulis artikel
+- **Category** - Kategori artikel
+- **Comment** - Komentar pada artikel
+- **Tag** - Tag untuk artikel
+
+### Object Properties
+- `hasAuthor` - Menghubungkan post dengan author
+- `hasCategory` - Menghubungkan post dengan category
+- `hasComment` - Menghubungkan post dengan comment
+- `hasTag` - Menghubungkan post dengan tag
+- `containsPost` - Menghubungkan blog dengan posts
+
+### Data Properties
+- Post: `postTitle`, `postContent`, `postSlug`, `publishedDate`
+- Author: `authorName`, `authorEmail`, `authorUsername`
+- Category: `categoryName`, `categorySlug`, `categoryColor`
+- Comment: `commentContent`, `commentDate`
+
+📚 **Dokumentasi lengkap**: Lihat `ontology/README.md`
+
+## 🔍 Contoh SPARQL Queries
+
+### Query 1: Semua Posts dengan Authors
+```sparql
+PREFIX : <http://www.uriblog.com/ontology#>
+
+SELECT ?postTitle ?authorName
+WHERE {
+  ?post :postTitle ?postTitle .
+  ?post :hasAuthor ?author .
+  ?author :authorName ?authorName .
+}
+```
+
+### Query 2: Statistik Posts per Category
+```sparql
+PREFIX : <http://www.uriblog.com/ontology#>
+
+SELECT ?categoryName (COUNT(?post) AS ?total)
+WHERE {
+  ?post :hasCategory ?category .
+  ?category :categoryName ?categoryName .
+}
+GROUP BY ?categoryName
+```
+
+📚 **20+ Query examples**: Lihat `ontology/SPARQL-QUERIES.md`
+
+## 🎓 Tugas Kuliah - Checklist
+
+- [x] Membuat aplikasi web dengan Laravel
+- [x] Implementasi Semantic HTML5
+- [x] Membuat ontologi OWL dengan Protégé
+- [x] Mendefinisikan classes dan properties
+- [x] Membuat sample instances
+- [x] Setup Apache Jena Fuseki
+- [x] Upload data ke triple store
+- [x] Membuat SPARQL queries
+- [x] Dokumentasi lengkap
+- [ ] Screenshot demonstrasi
+- [ ] Laporan tugas
+
+## 📸 Screenshots
+
+### Web Application
+![Home Page](docs/screenshots/home.png)
+![Blog Posts](docs/screenshots/posts.png)
+
+### Protégé - Ontology Editor
+![Ontology Classes](docs/screenshots/protege-classes.png)
+
+### Fuseki - SPARQL Interface
+![SPARQL Query](docs/screenshots/fuseki-query.png)
+
+## 📚 Dokumentasi
+
+- **[Ontology Documentation](ontology/README.md)** - Penjelasan lengkap ontologi
+- **[Triple Store Setup](ontology/SETUP-TRIPLE-STORE.md)** - Panduan setup Fuseki
+- **[SPARQL Queries](ontology/SPARQL-QUERIES.md)** - Kumpulan query examples
+
+## 🤝 Kontribusi
+
+Project ini dibuat untuk tugas kuliah Web Semantic. Kontribusi dan saran sangat diterima!
+
+## 👨‍💻 Author
+
+**Kholil Mustofa**
+- GitHub: [@kholilmustofa](https://github.com/kholilmustofa)
+- Repository: [uri-blog](https://github.com/kholilmustofa/uri-blog)
+
+## 📝 License
+
+Project ini menggunakan [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- **Dosen Pengampu** - Mata Kuliah Web Semantic
+- **Laravel Community** - Framework yang luar biasa
+- **Apache Jena** - Triple store & SPARQL engine
+- **Protégé** - Ontology editor
+
+---
+
+<p align="center">
+  Made with ❤️ for Web Semantic Course
+</p>
+
+<p align="center">
+  <strong>Uri Blog</strong> - Where Traditional Web Meets Semantic Web
+</p>
