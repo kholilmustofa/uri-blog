@@ -3,9 +3,12 @@
         <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
                 <div class="shrink-0">
-                    <img class="size-8"
-                        src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company">
+                    <a href="/" class="flex items-center space-x-2">
+                        <img class="size-8"
+                            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                            alt="Uri Blog Logo">
+                        <span class="text-white text-xl font-bold">Uri Blog</span>
+                    </a>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -42,9 +45,9 @@
                                     </div>
                                 </button>
                             @else
-                                <a href="/login" class="text-white text-sm font-medium">Login</a>
-                                <span class="text-white text-sm">|</span>
-                                <a href="/register" class="text-white text-sm font-medium">Register</a>
+                                <a href="/login" class="text-black text-sm font-medium">Login</a>
+                                <span class="text-black text-sm">|</span>
+                                <a href="/register" class="text-black text-sm font-medium">Register</a>
                             @endif
                         </div>
 

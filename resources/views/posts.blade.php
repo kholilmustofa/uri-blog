@@ -1,9 +1,10 @@
 <x-layout :title="$title">
 
-    <div class="py-4 px-4 mx-auto max-w-screen-xl lg:px-6">
+    <section class="py-4 px-4 mx-auto max-w-screen-xl lg:px-6" aria-labelledby="blog-heading">
+        <h2 id="blog-heading" class="sr-only">Blog Posts</h2>
 
-
-        <form class="mb-8 max-w-md mx-auto">
+        <!-- Search Form -->
+        <form class="mb-8 max-w-md mx-auto" role="search" aria-label="Search blog posts">
             @if (request('category'))
                 <input type="hidden" name="category" value="{{ request('category') }}">
             @endif
@@ -22,59 +23,83 @@
                 </div>
                 <input type="search" id="default-search"
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search post title..." autofocus autocomplete="off" name="search"/>
+                    placeholder="Search post title..." autofocus autocomplete="off" name="search" />
                 <button type="submit"
                     class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
         </form>
 
-        {{ $posts->links() }}
-        <div class="mt-4 grid gap-8 lg:grid-cols-3 md:grid-cols2">
+        <!-- Pagination -->
+        <nav aria-label="Pagination">
+            {{ $posts->links() }}
+        </nav>
+
+        <!-- Posts Grid -->
+        <div class="mt-4 grid gap-8 lg:grid-cols-3 md:grid-cols-2">
             @forelse ($posts as $post)
                 <article
-                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <div class="flex justify-between items-center mb-5 text-gray-500">
-                        <a href="/posts?category={{ $post->category->slug }}">
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                    itemscope itemtype="http://schema.org/BlogPosting">
+
+                    <!-- Article Header -->
+                    <header class="flex justify-between items-center mb-5 text-gray-500">
+                        <a href="/posts?category={{ $post->category->slug }}" rel="category tag">
                             <span
-                                class="{{ $post->category->color }} text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                                class="{{ $post->category->color }} text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800"
+                                itemprop="articleSection">
                                 {{ $post->category->name }}
                             </span>
                         </a>
-                        <span class="text-sm">{{ $post->created_at->diffForHumans() }}</span>
+                        <time class="text-sm" datetime="{{ $post->created_at->toIso8601String() }}"
+                            itemprop="datePublished">
+                            {{ $post->created_at->diffForHumans() }}
+                        </time>
+                    </header>
+
+                    <!-- Article Title -->
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                        itemprop="headline">
+                        <a href="/posts/{{ $post['slug'] }}">{{ $post['title'] }}</a>
+                    </h2>
+
+                    <!-- Article Excerpt -->
+                    <div class="mb-5 font-light text-gray-500 dark:text-gray-400" itemprop="description">
+                        {!! Str::limit($post->body, 100) !!}
                     </div>
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><a
-                            href="/posts/{{ $post['slug'] }}">{{ $post['title'] }}</a></h2>
-                    <div class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::limit($post->body, 100) !!}</div>
-                    <div class="flex justify-between items-center">
-                        <a href="/posts?author={{ $post->author->username }}">
+
+                    <!-- Article Footer -->
+                    <footer class="flex justify-between items-center">
+                        <a href="/posts?author={{ $post->author->username }}" rel="author" itemprop="author"
+                            itemscope itemtype="http://schema.org/Person">
                             <div class="flex items-center space-x-4">
                                 <img class="w-7 h-7 rounded-full"
                                     src="{{ $post->author->avatar ? asset('storage/' . $post->author->avatar) : asset('img/avatar.png') }}"
-                                    alt="{{ $post->author->name }}" />
-                                <span class="font-medium text-xs dark:text-white">
+                                    alt="{{ $post->author->name }}" itemprop="image" />
+                                <span class="font-medium text-xs dark:text-white" itemprop="name">
                                     {{ $post->author->name }}
                                 </span>
                             </div>
                         </a>
                         <a href="/posts/{{ $post['slug'] }}"
-                            class="inline-flex text-xs items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                            class="inline-flex text-xs items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                            aria-label="Read more about {{ $post['title'] }}">
                             Read more
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path fill-rule="evenodd"
                                     d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                             </svg>
                         </a>
-                    </div>
+                    </footer>
                 </article>
             @empty
-                <div>
+                <div role="status" aria-live="polite">
                     <p class="font-semibold text-xl my-4">Article not found!</p>
                     <a href="/posts" class="block text-blue-500 hover:underline">&laquo; Back to all posts</a>
                 </div>
             @endforelse
         </div>
-    </div>
+    </section>
 </x-layout>
 {{-- Str::Limit untuk membatasi caracter yang akan ditampilkan --}}

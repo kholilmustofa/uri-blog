@@ -1,39 +1,61 @@
 <x-layout :title="$title">
-    
-    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+
+    <article class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased" itemscope
+        itemtype="http://schema.org/BlogPosting">
         <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-            <article
+            <div
                 class="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
 
-                <a href="/posts" class="font-medium text-xs text-blue-500 hover:underline">Back to all posts.</a>
+                <!-- Breadcrumb Navigation -->
+                <nav aria-label="Breadcrumb" class="mb-4">
+                    <a href="/posts" class="font-medium text-xs text-blue-500 hover:underline">&laquo; Back to all
+                        posts</a>
+                </nav>
 
                 <header class="my-4 lg:mb-6 not-format">
-                    <address class="flex items-center mb-6 not-italic">
+                    <!-- Author Info -->
+                    <address class="flex items-center mb-6 not-italic" itemprop="author" itemscope
+                        itemtype="http://schema.org/Person">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                             <img class="mr-4 w-16 h-16 rounded-full"
                                 src="{{ $post->author->avatar ? asset('storage/' . $post->author->avatar) : asset('img/avatar.png') }}"
-                                alt="{{ $post->author->name }}">
+                                alt="{{ $post->author->name }}" itemprop="image">
                             <div>
                                 <a href="/posts?author={{ $post->author->username }}" rel="author"
-                                    class="text-xl font-bold text-gray-900 dark:text-white">{{ $post->author->name }}</a>
-                                <a href="/posts?category={{ $post->category->slug }}" class="block">
+                                    class="text-xl font-bold text-gray-900 dark:text-white" itemprop="name">
+                                    {{ $post->author->name }}
+                                </a>
+                                <a href="/posts?category={{ $post->category->slug }}" class="block" rel="category tag">
                                     <span
-                                        class="{{ $post->category->color }} text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                                        class="{{ $post->category->color }} text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800"
+                                        itemprop="articleSection">
                                         {{ $post->category->name }}
                                     </span>
                                 </a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">{{ $post->created_at->diffForHumans() }}</p>
+                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                    <time datetime="{{ $post->created_at->toIso8601String() }}"
+                                        itemprop="datePublished">
+                                        {{ $post->created_at->diffForHumans() }}
+                                    </time>
+                                </p>
                             </div>
                         </div>
                     </address>
-                    <h1
-                        class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                        {{ $post['title'] }}</h1>
-                </header>
-                <p>{!! $post['body'] !!}</p>
 
-            </article>
+                    <!-- Article Title -->
+                    <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white"
+                        itemprop="headline">
+                        {{ $post['title'] }}
+                    </h1>
+                </header>
+
+                <!-- Article Content -->
+                <div itemprop="articleBody">
+                    {!! $post['body'] !!}
+                </div>
+
+            </div>
         </div>
-    </main>
+    </article>
 
 </x-layout>
