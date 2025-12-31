@@ -1,0 +1,156 @@
+@prefix : <http://www.uriblog.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+# ===================================
+# Blog Instance
+# ===================================
+
+:UriBlog rdf:type :Blog ;
+    :blogName "Uri Blog" ;
+    :blogDescription "Your source for insightful articles and stories" ;
+    :blogURL "http://127.0.0.1:8000"^^xsd:anyURI .
+
+# ===================================
+# Author Instances
+# ===================================
+
+:Author_KholilMustofa rdf:type :Author ;
+    :authorName "Kholil Mustofa" ;
+    :authorUsername "kholilmustofa" ;
+    :authorEmail "kholil@uriblog.com" ;
+    :authorBio "Web developer and tech enthusiast" .
+
+:Author_JohnDoe rdf:type :Author ;
+    :authorName "John Doe" ;
+    :authorUsername "johndoe" ;
+    :authorEmail "john@uriblog.com" ;
+    :authorBio "Content writer and blogger" .
+
+# ===================================
+# Category Instances
+# ===================================
+
+:Category_Laravel rdf:type :Category ;
+    :categoryName "Laravel" ;
+    :categorySlug "laravel" ;
+    :categoryColor "bg-blue-500" .
+
+:Category_WebDevelopment rdf:type :Category ;
+    :categoryName "Web Development" ;
+    :categorySlug "web-development" ;
+    :categoryColor "bg-green-500" .
+
+:Category_Tutorial rdf:type :Category ;
+    :categoryName "Tutorial" ;
+    :categorySlug "tutorial" ;
+    :categoryColor "bg-purple-500" .
+
+:Category_Technology rdf:type :Category ;
+    :categoryName "Technology" ;
+    :categorySlug "technology" ;
+    :categoryColor "bg-red-500" .
+
+# ===================================
+# Tag Instances
+# ===================================
+
+:Tag_PHP rdf:type :Tag ;
+    :tagName "PHP" .
+
+:Tag_JavaScript rdf:type :Tag ;
+    :tagName "JavaScript" .
+
+:Tag_SemanticWeb rdf:type :Tag ;
+    :tagName "Semantic Web" .
+
+:Tag_OWL rdf:type :Tag ;
+    :tagName "OWL" .
+
+:Tag_RDF rdf:type :Tag ;
+    :tagName "RDF" .
+
+# ===================================
+# Post Instances
+# ===================================
+
+:Post_BelajarLaravel rdf:type :Post ;
+    :postTitle "Belajar Laravel untuk Pemula" ;
+    :postSlug "belajar-laravel" ;
+    :postContent "Laravel adalah framework PHP yang powerful dan mudah dipelajari. Dalam tutorial ini, kita akan belajar dasar-dasar Laravel..." ;
+    :publishedDate "2025-12-30T10:00:00"^^xsd:dateTime ;
+    :updatedDate "2025-12-30T10:00:00"^^xsd:dateTime ;
+    :hasAuthor :Author_KholilMustofa ;
+    :hasCategory :Category_Laravel ;
+    :hasTag :Tag_PHP .
+
+:Post_SemanticWebIntro rdf:type :Post ;
+    :postTitle "Introduction to Semantic Web" ;
+    :postSlug "semantic-web-intro" ;
+    :postContent "Semantic Web adalah evolusi dari World Wide Web yang memungkinkan mesin untuk memahami dan memproses informasi..." ;
+    :publishedDate "2025-12-31T14:00:00"^^xsd:dateTime ;
+    :updatedDate "2025-12-31T14:00:00"^^xsd:dateTime ;
+    :hasAuthor :Author_KholilMustofa ;
+    :hasCategory :Category_Technology ;
+    :hasTag :Tag_SemanticWeb , :Tag_OWL , :Tag_RDF .
+
+:Post_WebDevTips rdf:type :Post ;
+    :postTitle "10 Web Development Tips for 2025" ;
+    :postSlug "web-dev-tips-2025" ;
+    :postContent "Here are 10 essential web development tips that will help you become a better developer in 2025..." ;
+    :publishedDate "2025-12-29T09:00:00"^^xsd:dateTime ;
+    :updatedDate "2025-12-29T09:00:00"^^xsd:dateTime ;
+    :hasAuthor :Author_JohnDoe ;
+    :hasCategory :Category_WebDevelopment ;
+    :hasTag :Tag_JavaScript .
+
+:Post_LaravelTutorial rdf:type :Post ;
+    :postTitle "Laravel Tutorial: Building a Blog" ;
+    :postSlug "laravel-tutorial-blog" ;
+    :postContent "In this comprehensive tutorial, we'll build a complete blog system using Laravel framework..." ;
+    :publishedDate "2025-12-28T15:30:00"^^xsd:dateTime ;
+    :updatedDate "2025-12-28T15:30:00"^^xsd:dateTime ;
+    :hasAuthor :Author_KholilMustofa ;
+    :hasCategory :Category_Tutorial ;
+    :hasTag :Tag_PHP .
+
+# ===================================
+# Comment Instances
+# ===================================
+
+:Comment_1 rdf:type :Comment ;
+    :commentContent "Great tutorial! Very helpful for beginners." ;
+    :commentDate "2025-12-30T11:30:00"^^xsd:dateTime ;
+    :commentOn :Post_BelajarLaravel .
+
+:Comment_2 rdf:type :Comment ;
+    :commentContent "Thanks for sharing this knowledge about Semantic Web!" ;
+    :commentDate "2025-12-31T15:00:00"^^xsd:dateTime ;
+    :commentOn :Post_SemanticWebIntro .
+
+:Comment_3 rdf:type :Comment ;
+    :commentContent "These tips are really useful. Looking forward to more content!" ;
+    :commentDate "2025-12-29T10:15:00"^^xsd:dateTime ;
+    :commentOn :Post_WebDevTips .
+
+# ===================================
+# Blog Relationships
+# ===================================
+
+:UriBlog :containsPost :Post_BelajarLaravel ,
+                       :Post_SemanticWebIntro ,
+                       :Post_WebDevTips ,
+                       :Post_LaravelTutorial .
+
+# ===================================
+# Inverse Relationships (automatically inferred by reasoner)
+# ===================================
+
+# :Author_KholilMustofa :writtenBy :Post_BelajarLaravel , :Post_SemanticWebIntro , :Post_LaravelTutorial .
+# :Author_JohnDoe :writtenBy :Post_WebDevTips .
+# :Category_Laravel :belongsToCategory :Post_BelajarLaravel .
+# etc...
