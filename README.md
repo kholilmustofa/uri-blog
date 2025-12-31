@@ -7,11 +7,11 @@
   <img src="https://img.shields.io/badge/Apache_Jena-Fuseki-orange?style=for-the-badge" alt="Fuseki">
 </p>
 
-## 📖 Tentang Project
+## Tentang Project
 
 **Uri Blog** adalah aplikasi blog berbasis Laravel yang diintegrasikan dengan teknologi **Semantic Web**. Project ini dibuat sebagai tugas kuliah Web Semantic yang menggabungkan pengembangan web modern dengan konsep knowledge graph dan ontologi.
 
-### 🎯 Tujuan Project
+### Tujuan Project
 
 1. Membangun aplikasi blog fungsional dengan Laravel
 2. Membuat ontologi OWL untuk domain blog
@@ -19,25 +19,25 @@
 4. Menyediakan SPARQL endpoint untuk query semantic data
 5. Mendemonstrasikan integrasi web tradisional dengan Semantic Web
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 ### Web Application (Laravel)
-- ✅ **Authentication & Authorization** - Login, register, dan manajemen user
-- ✅ **CRUD Posts** - Create, read, update, delete artikel blog
-- ✅ **Categories & Tags** - Kategorisasi artikel
-- ✅ **Author Management** - Profil penulis
-- ✅ **Responsive Design** - Mobile-friendly dengan Tailwind CSS
-- ✅ **Semantic HTML5** - Struktur HTML yang semantic
-- ✅ **SEO Optimized** - Meta tags dan Schema.org markup
+- **Authentication & Authorization** - Login, register, dan manajemen user
+- **CRUD Posts** - Create, read, update, delete artikel blog
+- **Categories & Tags** - Kategorisasi artikel
+- **Author Management** - Profil penulis
+- **Responsive Design** - Mobile-friendly dengan Tailwind CSS
+- **Semantic HTML5** - Struktur HTML yang semantic
+- **SEO Optimized** - Meta tags dan Schema.org markup
 
 ### Semantic Web Features
-- ✅ **OWL Ontology** - Ontologi lengkap untuk domain blog
-- ✅ **RDF Data** - Data dalam format RDF/Turtle
-- ✅ **Triple Store** - Apache Jena Fuseki integration
-- ✅ **SPARQL Endpoint** - Query interface untuk semantic data
-- ✅ **Knowledge Graph** - Representasi relasi antar entitas
+- **OWL Ontology** - Ontologi lengkap untuk domain blog
+- **RDF Data** - Data dalam format RDF/Turtle
+- **Triple Store** - Apache Jena Fuseki integration
+- **SPARQL Endpoint** - Query interface untuk semantic data
+- **Knowledge Graph** - Representasi relasi antar entitas
 
-## 🏗️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 ### Backend
 - **Laravel 11.x** - PHP Framework
@@ -57,7 +57,7 @@
 - **RDF/Turtle** - Data serialization formats
 - **SPARQL 1.1** - Query language
 
-## 📁 Struktur Project
+## Struktur Project
 
 ```
 uri-blog/
@@ -68,7 +68,7 @@ uri-blog/
 │   ├── views/            # Blade templates (Semantic HTML5)
 │   └── css/              # Stylesheets
 ├── routes/               # Web routes
-├── ontology/             # 🧠 Semantic Web Files
+├── ontology/             # Semantic Web Files
 │   ├── uri-blog-ontology.owl      # OWL Ontology
 │   ├── uri-blog-instances.ttl     # Sample RDF data
 │   ├── README.md                  # Ontology documentation
@@ -77,7 +77,7 @@ uri-blog/
 └── README.md             # This file
 ```
 
-## 🚀 Instalasi & Setup
+## Instalasi & Setup
 
 ### Prerequisites
 - PHP 8.2 or higher
@@ -141,7 +141,7 @@ php artisan serve
 
 Buka browser: http://127.0.0.1:8000
 
-## 🧠 Setup Semantic Web (Triple Store)
+## Setup Semantic Web (Triple Store)
 
 ### 1. Install Apache Jena Fuseki
 - Download dari: https://jena.apache.org/download/
@@ -175,9 +175,9 @@ WHERE {
 }
 ```
 
-📚 **Dokumentasi lengkap**: Lihat `ontology/SETUP-TRIPLE-STORE.md`
+**Dokumentasi lengkap**: Lihat `ontology/SETUP-TRIPLE-STORE.md`
 
-## 📊 Ontologi Uri Blog
+## Ontologi Uri Blog
 
 ### Classes
 - **Blog** - Representasi website blog
@@ -200,9 +200,9 @@ WHERE {
 - Category: `categoryName`, `categorySlug`, `categoryColor`
 - Comment: `commentContent`, `commentDate`
 
-📚 **Dokumentasi lengkap**: Lihat `ontology/README.md`
+**Dokumentasi lengkap**: Lihat `ontology/README.md`
 
-## 🔍 Contoh SPARQL Queries
+## Contoh SPARQL Queries
 
 ### Query 1: Semua Posts dengan Authors
 ```sparql
@@ -228,9 +228,9 @@ WHERE {
 GROUP BY ?categoryName
 ```
 
-📚 **20+ Query examples**: Lihat `ontology/SPARQL-QUERIES.md`
+**20+ Query examples**: Lihat `ontology/SPARQL-QUERIES.md`
 
-## 🎓 Tugas Kuliah - Checklist
+## Tugas Kuliah - Checklist
 
 - [x] Membuat aplikasi web dengan Laravel
 - [x] Implementasi Semantic HTML5
@@ -244,7 +244,7 @@ GROUP BY ?categoryName
 - [ ] Screenshot demonstrasi
 - [ ] Laporan tugas
 
-## 📸 Screenshots
+## Screenshots
 
 ### Web Application
 ![Home Page](docs/screenshots/home.png)
@@ -256,27 +256,27 @@ GROUP BY ?categoryName
 ### Fuseki - SPARQL Interface
 ![SPARQL Query](docs/screenshots/fuseki-query.png)
 
-## 📚 Dokumentasi
+## Dokumentasi
 
 - **[Ontology Documentation](ontology/README.md)** - Penjelasan lengkap ontologi
 - **[Triple Store Setup](ontology/SETUP-TRIPLE-STORE.md)** - Panduan setup Fuseki
 - **[SPARQL Queries](ontology/SPARQL-QUERIES.md)** - Kumpulan query examples
 
-## 🤝 Kontribusi
+## Kontribusi
 
-Project ini dibuat untuk tugas kuliah Web Semantic. Kontribusi dan saran sangat diterima!
+Project ini dibuat untuk tugas kuliah Web Semantic. Kontribusi dan saran sangat diterima.
 
-## 👨‍💻 Author
+## Author
 
 **Kholil Mustofa**
 - GitHub: [@kholilmustofa](https://github.com/kholilmustofa)
 - Repository: [uri-blog](https://github.com/kholilmustofa/uri-blog)
 
-## 📝 License
+## License
 
 Project ini menggunakan [MIT License](LICENSE).
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Dosen Pengampu** - Mata Kuliah Web Semantic
 - **Laravel Community** - Framework yang luar biasa
@@ -286,7 +286,7 @@ Project ini menggunakan [MIT License](LICENSE).
 ---
 
 <p align="center">
-  Made with ❤️ for Web Semantic Course
+  Made with care for Web Semantic Course
 </p>
 
 <p align="center">
