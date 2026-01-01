@@ -216,35 +216,8 @@ WHERE {
 }
 ```
 
-### Query 2: Statistik Posts per Category
-```sparql
-PREFIX : <http://www.uriblog.com/ontology#>
-
-SELECT ?categoryName (COUNT(?post) AS ?total)
-WHERE {
-  ?post :hasCategory ?category .
-  ?category :categoryName ?categoryName .
-}
-GROUP BY ?categoryName
-```
 
 **20+ Query examples**: Lihat `ontology/SPARQL-QUERIES.md`
-
-## Tugas Kuliah - Checklist
-
-- [x] Membuat aplikasi web dengan Laravel
-- [x] Implementasi Semantic HTML5
-- [x] Membuat ontologi OWL dengan Protégé
-- [x] Mendefinisikan classes dan properties
-- [x] Membuat sample instances
-- [x] Setup Apache Jena Fuseki
-- [x] Upload data ke triple store
-- [x] Membuat SPARQL queries
-- [x] Dokumentasi lengkap
-- [ ] Screenshot demonstrasi
-- [ ] Laporan tugas
-
-## Screenshots
 
 ### Web Application
 ![Home Page](docs/screenshots/home.png)
@@ -276,19 +249,6 @@ Project ini dibuat untuk tugas kuliah Web Semantic. Kontribusi dan saran sangat 
 
 Project ini menggunakan [MIT License](LICENSE).
 
-## Acknowledgments
-
-- **Dosen Pengampu** - Mata Kuliah Web Semantic
-- **Laravel Community** - Framework yang luar biasa
-- **Apache Jena** - Triple store & SPARQL engine
-- **Protégé** - Ontology editor
 
 ---
 
-<p align="center">
-  Made with care for Web Semantic Course
-</p>
-
-<p align="center">
-  <strong>Uri Blog</strong> - Where Traditional Web Meets Semantic Web
-</p>
