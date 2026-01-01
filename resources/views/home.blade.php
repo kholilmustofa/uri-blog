@@ -94,9 +94,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @forelse ($featuredPosts as $post)
                     <article
-                        class="group flex flex-col bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-gray-200 transition-all duration-500 h-full relative overflow-hidden">
+                        class="group flex flex-col bg-white rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-gray-200 transition-all duration-500 h-full overflow-hidden">
+
+                        <!-- Image Container -->
+                        <div class="relative overflow-hidden aspect-[16/10]">
+                            <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
+                                alt="{{ $post->title }}"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+
                         <!-- Content -->
-                        <div class="flex flex-col flex-1 gap-6 relative z-10">
+                        <div class="flex flex-col flex-1 p-8 gap-6 relative z-10">
                             <!-- Category Badge -->
                             <div>
                                 <a href="/posts?category={{ $post->category->slug }}"

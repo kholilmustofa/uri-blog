@@ -90,7 +90,17 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
                     @forelse ($posts as $post)
                         <article
-                            class="group flex flex-col bg-white rounded-3xl shadow-sm hover:shadow-2xl hover:shadow-gray-200 transition-all duration-500 border border-gray-100 overflow-hidden h-full">
+                            class="group flex flex-col bg-white rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:shadow-gray-200 transition-all duration-500 border border-gray-100 overflow-hidden h-full">
+
+                            <!-- Image Container -->
+                            <div class="relative overflow-hidden aspect-[16/10]">
+                                <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
+                                    alt="{{ $post->title }}"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                            </div>
 
                             <!-- Post Content -->
                             <div class="flex flex-col flex-1 p-8 gap-5">

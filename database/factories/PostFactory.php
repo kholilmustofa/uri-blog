@@ -25,7 +25,8 @@ class PostFactory extends Factory
             'author_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => Str::slug($title),
-            'body' => fake()->text()
+            'body' => fake()->text(),
+            'image' => 'https://picsum.photos/seed/' . fake()->uuid() . '/1200/600'
         ];
     }
 }

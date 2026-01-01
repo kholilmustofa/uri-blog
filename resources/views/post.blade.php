@@ -63,6 +63,13 @@
                         </div>
                     </div>
 
+                    <!-- Featured Image -->
+                    <div class="mb-12 overflow-hidden rounded-[2.5rem] shadow-2xl shadow-gray-200">
+                        <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
+                            alt="{{ $post->title }}"
+                            class="w-full h-auto object-cover max-h-[500px] hover:scale-105 transition-transform duration-700">
+                    </div>
+
                     <!-- Article Body -->
                     <div
                         class="prose prose-xl prose-indigo max-w-none text-gray-600 leading-relaxed prose-headings:font-black prose-headings:text-gray-900 prose-blockquote:border-l-indigo-600 prose-blockquote:bg-indigo-50/50 prose-blockquote:px-8 prose-blockquote:py-4 prose-blockquote:rounded-r-3xl prose-a:text-indigo-600 prose-a:font-bold hover:prose-a:text-indigo-800">
