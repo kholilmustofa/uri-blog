@@ -1,64 +1,50 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.uriblog.com/ontology#"
      xml:base="http://www.uriblog.com/ontology"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:foaf="http://xmlns.com/foaf/0.1/">
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.uriblog.com/ontology">
         <dc:creator>Kholil Mustofa</dc:creator>
-        <dc:title>Uri Blog Ontology</dc:title>
         <dc:description>An ontology for representing blog posts, authors, categories, and their relationships in Uri Blog</dc:description>
+        <dc:title>Uri Blog Ontology</dc:title>
         <owl:versionInfo>1.0</owl:versionInfo>
     </owl:Ontology>
     
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Classes
+    // Annotation properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <!-- http://www.uriblog.com/ontology#Blog -->
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Blog">
-        <rdfs:label>Blog</rdfs:label>
-        <rdfs:comment>Represents the blog website itself</rdfs:comment>
-    </owl:Class>
+    
 
-    <!-- http://www.uriblog.com/ontology#Post -->
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Post">
-        <rdfs:label>Post</rdfs:label>
-        <rdfs:comment>Represents a blog post article</rdfs:comment>
-    </owl:Class>
 
-    <!-- http://www.uriblog.com/ontology#Author -->
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Author">
-        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-        <rdfs:label>Author</rdfs:label>
-        <rdfs:comment>Represents a blog post author</rdfs:comment>
-    </owl:Class>
+    <!-- http://purl.org/dc/elements/1.1/creator -->
 
-    <!-- http://www.uriblog.com/ontology#Category -->
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Category">
-        <rdfs:label>Category</rdfs:label>
-        <rdfs:comment>Represents a blog post category</rdfs:comment>
-    </owl:Class>
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
 
-    <!-- http://www.uriblog.com/ontology#Comment -->
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Comment">
-        <rdfs:label>Comment</rdfs:label>
-        <rdfs:comment>Represents a comment on a blog post</rdfs:comment>
-    </owl:Class>
 
-    <!-- http://www.uriblog.com/ontology#Tag -->
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Tag">
-        <rdfs:label>Tag</rdfs:label>
-        <rdfs:comment>Represents a tag for categorizing posts</rdfs:comment>
-    </owl:Class>
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/title"/>
+    
+
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -68,191 +54,361 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <!-- http://www.uriblog.com/ontology#hasAuthor -->
-    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasAuthor">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Author"/>
-        <rdfs:label>has author</rdfs:label>
-        <rdfs:comment>Relates a post to its author</rdfs:comment>
-    </owl:ObjectProperty>
+    
 
-    <!-- http://www.uriblog.com/ontology#writtenBy -->
-    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#writtenBy">
-        <owl:inverseOf rdf:resource="http://www.uriblog.com/ontology#hasAuthor"/>
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:label>written by</rdfs:label>
-        <rdfs:comment>Relates an author to their posts</rdfs:comment>
-    </owl:ObjectProperty>
-
-    <!-- http://www.uriblog.com/ontology#hasCategory -->
-    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasCategory">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Category"/>
-        <rdfs:label>has category</rdfs:label>
-        <rdfs:comment>Relates a post to its category</rdfs:comment>
-    </owl:ObjectProperty>
 
     <!-- http://www.uriblog.com/ontology#belongsToCategory -->
+
     <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#belongsToCategory">
         <owl:inverseOf rdf:resource="http://www.uriblog.com/ontology#hasCategory"/>
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
         <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
         <rdfs:label>belongs to category</rdfs:label>
     </owl:ObjectProperty>
+    
 
-    <!-- http://www.uriblog.com/ontology#hasComment -->
-    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasComment">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Comment"/>
-        <rdfs:label>has comment</rdfs:label>
-        <rdfs:comment>Relates a post to its comments</rdfs:comment>
-    </owl:ObjectProperty>
 
     <!-- http://www.uriblog.com/ontology#commentOn -->
+
     <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#commentOn">
         <owl:inverseOf rdf:resource="http://www.uriblog.com/ontology#hasComment"/>
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Comment"/>
         <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
         <rdfs:label>comment on</rdfs:label>
     </owl:ObjectProperty>
+    
 
-    <!-- http://www.uriblog.com/ontology#hasTag -->
-    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasTag">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Tag"/>
-        <rdfs:label>has tag</rdfs:label>
-        <rdfs:comment>Relates a post to its tags</rdfs:comment>
-    </owl:ObjectProperty>
 
     <!-- http://www.uriblog.com/ontology#containsPost -->
+
     <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#containsPost">
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
         <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:label>contains post</rdfs:label>
         <rdfs:comment>Relates a blog to its posts</rdfs:comment>
+        <rdfs:label>contains post</rdfs:label>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#hasAuthor -->
+
+    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasAuthor">
+        <owl:inverseOf rdf:resource="http://www.uriblog.com/ontology#writtenBy"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Author"/>
+        <rdfs:comment>Relates a post to its author</rdfs:comment>
+        <rdfs:label>has author</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#hasCategory -->
+
+    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasCategory">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Category"/>
+        <rdfs:comment>Relates a post to its category</rdfs:comment>
+        <rdfs:label>has category</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#hasComment -->
+
+    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasComment">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Comment"/>
+        <rdfs:comment>Relates a post to its comments</rdfs:comment>
+        <rdfs:label>has comment</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#hasTag -->
+
+    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasTag">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Tag"/>
+        <rdfs:comment>Relates a post to its tags</rdfs:comment>
+        <rdfs:label>has tag</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#writtenBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#writtenBy">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
+        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:comment>Relates an author to their posts</rdfs:comment>
+        <rdfs:label>written by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Data Properties
+    // Data properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <!-- Post Properties -->
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#postTitle">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>post title</rdfs:label>
-    </owl:DatatypeProperty>
+    
 
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#postContent">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>post content</rdfs:label>
-    </owl:DatatypeProperty>
 
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#postSlug">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>post slug</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#publishedDate">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <rdfs:label>published date</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#updatedDate">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <rdfs:label>updated date</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <!-- Author Properties -->
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorName">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>author name</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorEmail">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>author email</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorUsername">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>author username</rdfs:label>
-    </owl:DatatypeProperty>
+    <!-- http://www.uriblog.com/ontology#authorBio -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorBio">
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label>author bio</rdfs:label>
     </owl:DatatypeProperty>
+    
 
-    <!-- Category Properties -->
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#categoryName">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
+
+    <!-- http://www.uriblog.com/ontology#authorEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorEmail">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>category name</rdfs:label>
+        <rdfs:label>author email</rdfs:label>
     </owl:DatatypeProperty>
+    
 
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#categorySlug">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
+
+    <!-- http://www.uriblog.com/ontology#authorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorName">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>category slug</rdfs:label>
+        <rdfs:label>author name</rdfs:label>
     </owl:DatatypeProperty>
+    
 
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#categoryColor">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
+
+    <!-- http://www.uriblog.com/ontology#authorUsername -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorUsername">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>category color</rdfs:label>
+        <rdfs:label>author username</rdfs:label>
     </owl:DatatypeProperty>
+    
 
-    <!-- Comment Properties -->
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#commentContent">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Comment"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>comment content</rdfs:label>
-    </owl:DatatypeProperty>
 
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#commentDate">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Comment"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <rdfs:label>comment date</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <!-- Tag Properties -->
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#tagName">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Tag"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>tag name</rdfs:label>
-    </owl:DatatypeProperty>
-
-    <!-- Blog Properties -->
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogName">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>blog name</rdfs:label>
-    </owl:DatatypeProperty>
+    <!-- http://www.uriblog.com/ontology#blogDescription -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogDescription">
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label>blog description</rdfs:label>
     </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#blogName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogName">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>blog name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#blogURL -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogURL">
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:label>blog URL</rdfs:label>
     </owl:DatatypeProperty>
+    
 
+
+    <!-- http://www.uriblog.com/ontology#categoryColor -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#categoryColor">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>category color</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#categoryName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#categoryName">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>category name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#categorySlug -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#categorySlug">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Category"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>category slug</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#commentContent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#commentContent">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Comment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>comment content</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#commentDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#commentDate">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Comment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label>comment date</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#postContent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#postContent">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>post content</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#postSlug -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#postSlug">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>post slug</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#postTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#postTitle">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>post title</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#publishedDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#publishedDate">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label>published date</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#tagName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#tagName">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Tag"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>tag name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#updatedDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#updatedDate">
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label>updated date</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.uriblog.com/ontology#Author -->
+
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Author">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <rdfs:comment>Represents a blog post author</rdfs:comment>
+        <rdfs:label>Author</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#Blog -->
+
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Blog">
+        <rdfs:comment>Represents the blog website itself</rdfs:comment>
+        <rdfs:label>Blog</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#Category -->
+
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Category">
+        <rdfs:comment>Represents a blog post category</rdfs:comment>
+        <rdfs:label>Category</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#Comment -->
+
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Comment">
+        <rdfs:comment>Represents a comment on a blog post</rdfs:comment>
+        <rdfs:label>Comment</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#Post -->
+
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Post">
+        <rdfs:comment>Represents a blog post article</rdfs:comment>
+        <rdfs:label>Post</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.uriblog.com/ontology#Tag -->
+
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Tag">
+        <rdfs:comment>Represents a tag for categorizing posts</rdfs:comment>
+        <rdfs:label>Tag</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
 </rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

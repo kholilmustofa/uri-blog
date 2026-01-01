@@ -1,61 +1,81 @@
-<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
-    <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-        <article
-            class="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+<div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+    <div class="p-8">
+        <!-- Dashboard Navigation & Actions -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <a href="/dashboard"
+                class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-700 transition">
+                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to all posts
+            </a>
 
-            <a href="/dashboard" class="font-medium text-xs text-blue-500 hover:underline">Back to all posts.</a>
+            <div class="flex items-center gap-3">
+                <a href="/dashboard/{{ $post->slug }}/edit"
+                    class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition shadow-sm">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                        </path>
+                    </svg>
+                    Edit Post
+                </a>
 
-            <header class="my-4 lg:mb-6 not-format">
-                <address class="flex items-center mb-6 not-italic">
-                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                        <img class="mr-4 w-16 h-16 rounded-full"
-                            src="{{ $post->author->avatar ? asset('storage/' . $post->author->avatar) : asset('img/avatar.png') }}"
-                            alt="{{ $post->author->name }}">
-                        <div>
-                            <a href="/posts?author={{ $post->author->username }}" rel="author"
-                                class="text-xl font-bold text-gray-900 dark:text-white">{{ $post->author->name }}</a>
-                            <a href="/posts?category={{ $post->category->slug }}" class="block">
-                                <span
-                                    class="{{ $post->category->color }} text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                                    {{ $post->category->name }}
-                                </span>
-                            </a>
-                            <p class="text-base text-gray-500 dark:text-gray-400">
-                                {{ $post->created_at->diffForHumans() }}</p>
-                        </div>
-                    </div>
-                </address>
-
-                <div class="flex gap-4 items-center">
-                    <a href="/dashboard/{{ $post->slug }}/edit"
-                        class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                            <path fill-rule="evenodd"
-                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Edit
-                    </a>
-                    <button type="button"
-                        class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                clip-rule="evenodd" />
+                <form action="/dashboard/{{ $post->slug }}" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this post?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="inline-flex items-center px-4 py-2 border border-red-200 text-red-600 text-sm font-semibold rounded-lg hover:bg-red-50 transition">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                            </path>
                         </svg>
                         Delete
                     </button>
+                </form>
+            </div>
+        </div>
+
+        <article class="max-w-4xl">
+            <header class="mb-10">
+                <!-- Category Badge -->
+                <div class="mb-6">
+                    <span
+                        class="{{ $post->category->color }} text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                        {{ $post->category->name }}
+                    </span>
                 </div>
 
-                <h1
-                    class="mb-4 mt-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                    {{ $post['title'] }}</h1>
-            </header>
-            <div>{!! $post['body'] !!}</div>
+                <!-- Title -->
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-8">
+                    {{ $post->title }}
+                </h1>
 
+                <!-- Author & Meta -->
+                <div class="flex items-center gap-4 pb-8 border-b border-gray-100">
+                    <img class="w-12 h-12 rounded-full ring-2 ring-indigo-50"
+                        src="{{ $post->author->avatar ? asset('storage/' . $post->author->avatar) : asset('img/avatar.png') }}"
+                        alt="{{ $post->author->name }}">
+                    <div>
+                        <div class="font-bold text-gray-900 text-lg">{{ $post->author->name }}</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-500 mt-1">
+                            <time datetime="{{ $post->created_at->toIso8601String() }}">
+                                {{ $post->created_at->format('F d, Y') }}
+                            </time>
+                            <span>•</span>
+                            <span>{{ $post->created_at->diffForHumans() }}</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Article Body -->
+            <div class="prose prose-lg prose-indigo max-w-none">
+                {!! $post->body !!}
+            </div>
         </article>
     </div>
-</main>
+</div>

@@ -2,21 +2,55 @@
 
 use App\Http\Controllers\PostDashboardController;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return view('home', ['title' => 'HomePage']);
+    $featuredPosts = Post::with(['author', 'category'])
+        ->latest()
+        ->take(6)
+        ->get();
+    
+    $stats = [
+        'posts' => Post::count(),
+        'authors' => User::count(),
+        'categories' => Category::count(),
+    ];
+    
+    return view('home', [
+        'title' => 'Home',
+        'featuredPosts' => $featuredPosts,
+        'stats' => $stats
+    ]);
 });
 
 Route::get('/posts', function () {
-    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString();
+    $categories = Category::withCount('posts')->get();
 
-    return view('posts', ['title' => 'Blog', 'posts' => $posts]);
+    return view('posts', [
+        'title' => 'Blog',
+        'posts' => $posts,
+        'categories' => $categories
+    ]);
 });
 
 Route::get('/posts/{post:slug}', function (Post $post) {
-    return view('post', ['title' => 'Single Post', 'post' => $post]);
+    // Get related posts from same category
+    $relatedPosts = Post::with(['author', 'category'])
+        ->where('category_id', $post->category_id)
+        ->where('id', '!=', $post->id)
+        ->latest()
+        ->take(3)
+        ->get();
+    
+    return view('post', [
+        'title' => 'Single Post',
+        'post' => $post,
+        'relatedPosts' => $relatedPosts
+    ]);
 });
 
 
@@ -46,4 +80,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/upload', [ProfileController::class, 'upload' ]);
 });
 
+// Semantic Web Routes
+use App\Http\Controllers\SemanticController;
+
+Route::prefix('semantic')->name('semantic.')->group(function () {
+    Route::get('/', [SemanticController::class, 'index'])->name('index');
+    Route::get('/posts', [SemanticController::class, 'posts'])->name('posts');
+    Route::post('/query', [SemanticController::class, 'query'])->name('query');
+    Route::post('/export', [SemanticController::class, 'export'])->name('export');
+    Route::post('/sync', [SemanticController::class, 'sync'])->name('sync');
+    Route::get('/download', [SemanticController::class, 'download'])->name('download');
+});
+
 require __DIR__ . '/auth.php';
+
