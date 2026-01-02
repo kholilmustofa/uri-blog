@@ -1,254 +1,91 @@
-# Uri Blog - Semantic Web Blog Application
+# uriblog - Premium Editorial Management System
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Laravel-11.x-red?style=for-the-badge&logo=laravel" alt="Laravel">
-  <img src="https://img.shields.io/badge/Semantic_Web-OWL-blue?style=for-the-badge" alt="Semantic Web">
-  <img src="https://img.shields.io/badge/Protégé-5.6-green?style=for-the-badge" alt="Protégé">
-  <img src="https://img.shields.io/badge/Apache_Jena-Fuseki-orange?style=for-the-badge" alt="Fuseki">
-</p>
+uriblog is a high-end editorial platform designed for seamless content management and premium reading experiences. Built with Laravel 12, it combines modern backend performance with a sophisticated, minimalist user interface focused on high-quality digital content delivery.
 
-## Tentang Project
+## Core Features
 
-**Uri Blog** adalah aplikasi blog berbasis Laravel yang diintegrasikan dengan teknologi **Semantic Web**. Project ini dibuat sebagai tugas kuliah Web Semantic yang menggabungkan pengembangan web modern dengan konsep knowledge graph dan ontologi.
+### Premium Editorial Design
+The platform features a sophisticated Indigo brand identity with fluid animations and premium 3D isometric visual elements. The user interface is designed to feel high-end, clean, and professional.
 
-### Tujuan Project
+### Advanced Authentication System
+Secure entry system featuring a centered split-panel layout for login and registration. Includes full email verification workflows, password recovery, and secure session management.
 
-1. Membangun aplikasi blog fungsional dengan Laravel
-2. Membuat ontologi OWL untuk domain blog
-3. Mengimplementasikan Semantic Web dengan triple store
-4. Menyediakan SPARQL endpoint untuk query semantic data
-5. Mendemonstrasikan integrasi web tradisional dengan Semantic Web
+### Content Management Dashboard
+A dedicated workspace for creators to manage their stories. Features include full CRUD (Create, Read, Update, Delete) capabilities, automatic slug generation, and ultra-minimalist pagination (Current / Total).
 
-## Fitur Utama
+### User Profile and Personalization
+Advanced profile management allowing users to update their personal information, securely change passwords, and manage their identity. Features a circular avatar upload system with real-time camera-integrated previews and automatic storage management.
 
-### Web Application (Laravel)
-- **Authentication & Authorization** - Login, register, dan manajemen user
-- **CRUD Posts** - Create, read, update, delete artikel blog
-- **Categories & Tags** - Kategorisasi artikel
-- **Author Management** - Profil penulis
-- **Responsive Design** - Mobile-friendly dengan Tailwind CSS
-- **Semantic HTML5** - Struktur HTML yang semantic
-- **SEO Optimized** - Meta tags dan Schema.org markup
+### Dynamic Community Showcase
+The authentication pages feature a real-time creators showcase that dynamically fetches active member avatars directly from the database, providing authentic social proof.
 
-### Semantic Web Features
-- **OWL Ontology** - Ontologi lengkap untuk domain blog
-- **RDF Data** - Data dalam format RDF/Turtle
-- **Triple Store** - Apache Jena Fuseki integration
-- **SPARQL Endpoint** - Query interface untuk semantic data
-- **Knowledge Graph** - Representasi relasi antar entitas
+### Responsive Architecture
+The entire platform is built with a mobile-first approach, ensuring a premium editorial experience across desktop, tablet, and smartphone devices.
 
-## Teknologi yang Digunakan
+## Tech Stack
 
 ### Backend
-- **Laravel 11.x** - PHP Framework
-- **MySQL** - Relational Database
-- **PHP 8.2+** - Programming Language
+- Laravel 12 Framework
+- PHP 8.2 or higher
+- MySQL Relational Database
+- Laravel Breeze (customized)
 
 ### Frontend
-- **Blade Templates** - Laravel templating engine
-- **Tailwind CSS** - Utility-first CSS framework
-- **Alpine.js** - Lightweight JavaScript framework
-- **Flowbite** - UI components
+- Tailwind CSS (Utility-first styling)
+- Alpine.js (Lightweight interactivity)
+- Blade Templating Engine
+- Material Symbols Outlined (System icons)
 
-### Semantic Web Stack
-- **Protégé 5.6** - Ontology editor
-- **Apache Jena Fuseki** - Triple store & SPARQL server
-- **OWL 2** - Web Ontology Language
-- **RDF/Turtle** - Data serialization formats
-- **SPARQL 1.1** - Query language
-
-## Struktur Project
-
-```
-uri-blog/
-├── app/                    # Laravel application code
-├── database/              # Migrations, seeders, factories
-├── public/                # Public assets
-├── resources/
-│   ├── views/            # Blade templates (Semantic HTML5)
-│   └── css/              # Stylesheets
-├── routes/               # Web routes
-├── ontology/             # Semantic Web Files
-│   ├── uri-blog-ontology.owl      # OWL Ontology
-│   ├── uri-blog-instances.ttl     # Sample RDF data
-│   ├── README.md                  # Ontology documentation
-│   ├── SETUP-TRIPLE-STORE.md      # Fuseki setup guide
-│   └── SPARQL-QUERIES.md          # Query examples
-└── README.md             # This file
-```
-
-## Instalasi & Setup
+## Installation Guide
 
 ### Prerequisites
-- PHP 8.2 or higher
+- PHP 8.2+
 - Composer
-- Node.js & NPM
-- MySQL
-- Java 17+ (untuk Fuseki)
-- Apache Jena Fuseki
-- Protégé (opsional, untuk editing ontology)
+- Node.js and NPM
+- MySQL Server
 
-### 1. Clone Repository
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/kholilmustofa/uri-blog.git
 cd uri-blog
 ```
 
-### 2. Install Dependencies
+### 2. Install Project Dependencies
 ```bash
-# Install PHP dependencies
 composer install
-
-# Install Node dependencies
 npm install
 ```
 
-### 3. Environment Setup
+### 3. Environment Configuration
 ```bash
-# Copy environment file
 cp .env.example .env
-
-# Generate application key
 php artisan key:generate
-
-# Configure database di .env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=uriblog
-DB_USERNAME=root
-DB_PASSWORD=
 ```
+Open the .env file and configure your database settings (DB_DATABASE, DB_USERNAME, DB_PASSWORD).
 
-### 4. Database Migration
+### 4. Database Initialization
 ```bash
-# Run migrations
 php artisan migrate
-
-# Seed database (optional)
 php artisan db:seed
 ```
 
-### 5. Build Assets
+### 5. Storage Link
+```bash
+php artisan storage:link
+```
+
+### 6. Build and Run
 ```bash
 npm run dev
-```
-
-### 6. Run Application
-```bash
 php artisan serve
 ```
+Access the application at http://127.0.0.1:8000
 
-Buka browser: http://127.0.0.1:8000
+## Project Status
+Completed UI/UX overhaul and core management features.
 
-## Setup Semantic Web (Triple Store)
-
-### 1. Install Apache Jena Fuseki
-- Download dari: https://jena.apache.org/download/
-- Extract ke folder (misal: `C:\fuseki`)
-
-### 2. Jalankan Fuseki Server
-```bash
-cd C:\fuseki\apache-jena-fuseki-5.6.0
-fuseki-server.bat
-```
-
-### 3. Akses Fuseki Web Interface
-Buka browser: http://localhost:3030
-
-### 4. Upload Ontology
-1. Buat dataset baru: `uriblog`
-2. Upload file:
-   - `ontology/uri-blog-ontology.owl`
-   - `ontology/uri-blog-instances.ttl`
-
-### 5. Test SPARQL Query
-```sparql
-PREFIX : <http://www.uriblog.com/ontology#>
-
-SELECT ?post ?title ?authorName
-WHERE {
-  ?post rdf:type :Post .
-  ?post :postTitle ?title .
-  ?post :hasAuthor ?author .
-  ?author :authorName ?authorName .
-}
-```
-
-**Dokumentasi lengkap**: Lihat `ontology/SETUP-TRIPLE-STORE.md`
-
-## Ontologi Uri Blog
-
-### Classes
-- **Blog** - Representasi website blog
-- **Post** - Artikel blog
-- **Author** - Penulis artikel
-- **Category** - Kategori artikel
-- **Comment** - Komentar pada artikel
-- **Tag** - Tag untuk artikel
-
-### Object Properties
-- `hasAuthor` - Menghubungkan post dengan author
-- `hasCategory` - Menghubungkan post dengan category
-- `hasComment` - Menghubungkan post dengan comment
-- `hasTag` - Menghubungkan post dengan tag
-- `containsPost` - Menghubungkan blog dengan posts
-
-### Data Properties
-- Post: `postTitle`, `postContent`, `postSlug`, `publishedDate`
-- Author: `authorName`, `authorEmail`, `authorUsername`
-- Category: `categoryName`, `categorySlug`, `categoryColor`
-- Comment: `commentContent`, `commentDate`
-
-**Dokumentasi lengkap**: Lihat `ontology/README.md`
-
-## Contoh SPARQL Queries
-
-### Query 1: Semua Posts dengan Authors
-```sparql
-PREFIX : <http://www.uriblog.com/ontology#>
-
-SELECT ?postTitle ?authorName
-WHERE {
-  ?post :postTitle ?postTitle .
-  ?post :hasAuthor ?author .
-  ?author :authorName ?authorName .
-}
-```
-
-
-**20+ Query examples**: Lihat `ontology/SPARQL-QUERIES.md`
-
-### Web Application
-![Home Page](docs/screenshots/home.png)
-![Blog Posts](docs/screenshots/posts.png)
-
-### Protégé - Ontology Editor
-![Ontology Classes](docs/screenshots/protege-classes.png)
-
-### Fuseki - SPARQL Interface
-![SPARQL Query](docs/screenshots/fuseki-query.png)
-
-## Dokumentasi
-
-- **[Ontology Documentation](ontology/README.md)** - Penjelasan lengkap ontologi
-- **[Triple Store Setup](ontology/SETUP-TRIPLE-STORE.md)** - Panduan setup Fuseki
-- **[SPARQL Queries](ontology/SPARQL-QUERIES.md)** - Kumpulan query examples
-
-## Kontribusi
-
-Project ini dibuat untuk tugas kuliah Web Semantic. Kontribusi dan saran sangat diterima.
-
-## Author
-
-**Kholil Mustofa**
-- GitHub: [@kholilmustofa](https://github.com/kholilmustofa)
-- Repository: [uri-blog](https://github.com/kholilmustofa/uri-blog)
+## Developer
+Kholil Mustofa
 
 ## License
-
-Project ini menggunakan [MIT License](LICENSE).
-
-
----
-
+This project is licensed under the MIT License.
