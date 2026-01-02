@@ -147,7 +147,6 @@ Ada 2 cara untuk upload data RDF ke Fuseki:
    php artisan rdf:sync
    ```
 
-**Catatan**: Untuk tugas kuliah, cara manual (Cara 1) sudah cukup.
 
 ---
 
@@ -179,16 +178,6 @@ LIMIT 10
 ```
 
 4. Klik tombol **"Run Query"** (atau tekan Ctrl+Enter)
-
-5. Anda akan melihat hasil query di bagian bawah
-
-### Contoh Hasil yang Diharapkan:
-
-| postTitle | authorName | categoryName |
-|-----------|------------|--------------|
-| "Judul Post 1" | "Kholil Mustofa" | "Technology" |
-| "Judul Post 2" | "John Doe" | "Lifestyle" |
-| ... | ... | ... |
 
 ---
 
