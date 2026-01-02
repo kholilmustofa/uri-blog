@@ -106,7 +106,8 @@
                             <div class="flex flex-col flex-1 p-8 gap-5 text-[#0f172a]">
                                 <div class="flex items-center justify-between">
                                     <a href="/posts?category={{ $post->category->slug }}"
-                                        class="{{ $post->category->color }} bg-opacity-10 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest {{ str_replace('bg-', 'text-', $post->category->color) }} hover:bg-indigo-600 hover:text-white transition-all">
+                                        class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest hover:opacity-80 transition-all"
+                                        style="background-color: {{ $post->category->color }}20; color: {{ $post->category->color }}">
                                         {{ $post->category->name }}
                                     </a>
                                     <div

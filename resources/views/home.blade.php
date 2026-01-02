@@ -72,7 +72,8 @@
                                     alt="{{ $post->title }}"
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                                 <a href="/posts?category={{ $post->category->slug }}"
-                                    class="absolute top-5 left-5 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-[#0f172a] shadow-sm hover:bg-[#4f46e5] hover:text-white transition-colors">
+                                    class="absolute top-5 left-5 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-sm hover:opacity-90 transition-all"
+                                    style="background-color: {{ $post->category->color }}E6; color: white">
                                     {{ $post->category->name }}
                                 </a>
                             </div>

@@ -35,7 +35,8 @@
                     <!-- Header Meta -->
                     <div class="flex items-center gap-4 mb-6">
                         <a href="/posts?category={{ $post->category->slug }}"
-                            class="{{ $post->category->color }} bg-opacity-10 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest {{ str_replace('bg-', 'text-', $post->category->color) }} hover:bg-indigo-600 hover:text-white transition-all">
+                            class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest hover:opacity-80 transition-all"
+                            style="background-color: {{ $post->category->color }}20; color: {{ $post->category->color }}">
                             {{ $post->category->name }}
                         </a>
                         <div class="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
@@ -123,7 +124,8 @@
                                 <a href="/posts/{{ $relatedPost->slug }}" class="group flex flex-col gap-2">
                                     <div class="flex items-center gap-2">
                                         <span
-                                            class="{{ $relatedPost->category->color }} bg-opacity-10 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest {{ str_replace('bg-', 'text-', $relatedPost->category->color) }}">
+                                            class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest"
+                                            style="background-color: {{ $relatedPost->category->color }}20; color: {{ $relatedPost->category->color }}">
                                             {{ $relatedPost->category->name }}
                                         </span>
                                         <span
