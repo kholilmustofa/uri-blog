@@ -1,106 +1,139 @@
 # uriblog - Premium Editorial Management System
 
-uriblog is a high-end editorial platform designed for seamless content management and premium reading experiences. Built with Laravel 12, it combines modern backend performance with a sophisticated, minimalist user interface focused on high-quality digital content delivery.
+A modern content management platform built with Laravel 12, featuring a sophisticated Indigo design system and integrated semantic web capabilities.
 
-## Core Features
+## ✨ Key Features
 
-### Premium Editorial Design
-The platform features a sophisticated Indigo brand identity with fluid animations and premium 3D isometric visual elements. The user interface is designed to feel high-end, clean, and professional.
+- **Premium UI/UX**: Sophisticated Indigo theme with fluid animations and 3D isometric elements
+- **Full CRUD Management**: Complete content creation, editing, and deletion workflows
+- **Category System**: Organize posts with color-coded categories
+- **User Authentication**: Secure login, registration, and email verification
+- **Profile Management**: Avatar uploads, password changes, and personal info updates
+- **Responsive Design**: Mobile-first approach for all devices
+- **Semantic Web Integration**: RDF export and SPARQL querying capabilities
 
-### Advanced Authentication System
-Secure entry system featuring a centered split-panel layout for login and registration. Includes full email verification workflows, password recovery, and secure session management.
+## 🧬 Semantic Web Implementation
 
-### Content Management Dashboard
-A dedicated workspace for creators to manage their stories. Features include full CRUD (Create, Read, Update, Delete) capabilities, automatic slug generation, and ultra-minimalist pagination (Current / Total).
+This project includes a **complete Semantic Web implementation** with:
+- OWL 2 ontology for blog domain
+- Automatic RDF export from MySQL database
+- Real-time synchronization with Apache Jena Fuseki
+- SPARQL endpoint for advanced queries
+- Observer pattern for auto-sync
 
-### User Profile and Personalization
-Advanced profile management allowing users to update their personal information, securely change passwords, and manage their identity. Features a circular avatar upload system with real-time camera-integrated previews and automatic storage management.
+> 📖 **For complete semantic web documentation, setup guides, and SPARQL examples:**  
+> **See [ontology/README.md](ontology/README.md)**
 
-### Dynamic Community Showcase
-The authentication pages feature a real-time creators showcase that dynamically fetches active member avatars directly from the database, providing authentic social proof.
+## 🛠️ Tech Stack
 
-### Responsive Architecture
-The entire platform is built with a mobile-first approach, ensuring a premium editorial experience across desktop, tablet, and smartphone devices.
+**Backend:**
+- Laravel 12
+- PHP 8.2+
+- MySQL
+- Apache Jena Fuseki (for semantic web)
 
-## Tech Stack
+**Frontend:**
+- Tailwind CSS
+- Alpine.js
+- Blade Templates
+- Material Symbols Icons
 
-### Backend
-- Laravel 12 Framework
-- PHP 8.2 or higher
-- MySQL Relational Database
-- Laravel Breeze (customized)
-
-### Frontend
-- Tailwind CSS (Utility-first styling)
-- Alpine.js (Lightweight interactivity)
-- Blade Templating Engine
-- Material Symbols Outlined (System icons)
-
-## Installation Guide
+## 🚀 Quick Start
 
 ### Prerequisites
 - PHP 8.2+
 - Composer
-- Node.js and NPM
-- MySQL Server
+- Node.js & NPM
+- MySQL
 
-### 1. Clone the Repository
+### Installation
+
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/kholilmustofa/uri-blog.git
+   cd uri-blog
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+   
+   Configure your database in `.env`:
+   ```
+   DB_DATABASE=uriblog
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+4. **Database Setup**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+
+5. **Storage Link**
+   ```bash
+   php artisan storage:link
+   ```
+
+6. **Run Application**
+   ```bash
+   npm run dev
+   php artisan serve
+   ```
+   
+   Access at: `http://127.0.0.1:8000`
+
+### Optional: Semantic Web Setup
+
+For semantic web features (RDF export & SPARQL queries):
+
 ```bash
-git clone https://github.com/kholilmustofa/uri-blog.git
-cd uri-blog
+# Export database to RDF
+php artisan rdf:export
+
+# Sync to Fuseki (requires Fuseki server running)
+php artisan rdf:sync
 ```
 
-### 2. Install Project Dependencies
-```bash
-composer install
-npm install
+See [ontology/README.md](ontology/README.md) for detailed Fuseki setup instructions.
+
+## 📁 Project Structure
+
+```
+uriblog/
+├── app/                    # Laravel application logic
+│   ├── Services/          # RDFService, FusekiService
+│   ├── Observers/         # Auto-sync observers
+│   └── Console/Commands/  # RDF export/sync commands
+├── ontology/              # Semantic web documentation
+│   ├── README.md          # Complete semantic web guide
+│   ├── implementasi.md    # Implementation file structure
+│   └── uri-blog-ontology.owl  # OWL ontology
+├── resources/views/       # Blade templates
+├── storage/app/rdf/       # RDF export files
+└── config/semantic.php    # Semantic web configuration
 ```
 
-### 3. Environment Configuration
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-Open the .env file and configure your database settings (DB_DATABASE, DB_USERNAME, DB_PASSWORD).
+## 📚 Documentation
 
-### 4. Database Initialization
-```bash
-php artisan migrate
-php artisan db:seed
-```
+- **Main App**: You're reading it!
+- **Semantic Web**: [ontology/README.md](ontology/README.md)
+- **Implementation Details**: [ontology/implementasi.md](ontology/implementasi.md)
 
-### 5. Storage Link
-```bash
-php artisan storage:link
-```
+## 👤 Developer
 
-### 6. Build and Run
-```bash
-npm run dev
-php artisan serve
-```
-Access the application at http://127.0.0.1:8000
+**Kholil Mustofa**  
+GitHub: [@kholilmustofa](https://github.com/kholilmustofa)
 
-## Semantic Web Implementation
+## 📄 License
 
-This project includes a complete Semantic Web implementation using OWL ontology and Apache Jena Fuseki triple store. The semantic layer provides advanced querying capabilities through SPARQL and enables knowledge graph representation of blog data.
-
-For detailed documentation on the ontology structure, SPARQL queries, and Fuseki setup, please refer to:
-
-**[ontology/README.md](ontology/README.md)**
-
-Key features:
-- OWL 2 ontology defining blog domain concepts
-- RDF data export from Laravel database
-- SPARQL endpoint for semantic queries
-- Integration with Apache Jena Fuseki
-- Automated data synchronization commands
-
-## Project Status
-Completed UI/UX overhaul and core management features.
-
-## Developer
-Kholil Mustofa
-
-## License
-This project is licensed under the MIT License.
+MIT License

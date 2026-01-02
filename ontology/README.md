@@ -95,27 +95,6 @@ Represents a content category for organizing posts.
 - **Range**: Post
 - **Description**: Relates the blog to its posts
 
-## Data Properties Summary
-
-| Property | Domain | Range | Description |
-|----------|--------|-------|-------------|
-| authorName | User | string | Full name of the user |
-| authorUsername | User | string | Unique username |
-| authorEmail | User | string | Email address |
-| authorAvatar | User | string | Path to avatar image |
-| emailVerified | User | boolean | Email verification status |
-| blogName | Blog | string | Name of the blog |
-| blogDescription | Blog | string | Blog description |
-| blogURL | Blog | anyURI | Blog website URL |
-| categoryName | Category | string | Category name |
-| categorySlug | Category | string | URL-friendly category identifier |
-| categoryColor | Category | string | Hex color code for UI |
-| postTitle | Post | string | Post title |
-| postContent | Post | string | Post body content |
-| postSlug | Post | string | URL-friendly post identifier |
-| postImage | Post | string | Path to featured image |
-| publishedDate | Post | dateTime | Creation timestamp |
-| updatedDate | Post | dateTime | Last update timestamp |
 
 ## Usage with Apache Jena Fuseki
 
