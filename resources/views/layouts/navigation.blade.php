@@ -18,6 +18,10 @@
                         class="text-sm font-black uppercase tracking-widest">
                         {{ __('My Stories') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')"
+                        class="text-sm font-black uppercase tracking-widest">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                 </div>
             </div>
 
