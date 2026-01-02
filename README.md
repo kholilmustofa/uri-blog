@@ -81,6 +81,21 @@ php artisan serve
 ```
 Access the application at http://127.0.0.1:8000
 
+## Semantic Web Implementation
+
+This project includes a complete Semantic Web implementation using OWL ontology and Apache Jena Fuseki triple store. The semantic layer provides advanced querying capabilities through SPARQL and enables knowledge graph representation of blog data.
+
+For detailed documentation on the ontology structure, SPARQL queries, and Fuseki setup, please refer to:
+
+**[ontology/README.md](ontology/README.md)**
+
+Key features:
+- OWL 2 ontology defining blog domain concepts
+- RDF data export from Laravel database
+- SPARQL endpoint for semantic queries
+- Integration with Apache Jena Fuseki
+- Automated data synchronization commands
+
 ## Project Status
 Completed UI/UX overhaul and core management features.
 
