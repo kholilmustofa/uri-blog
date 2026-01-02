@@ -15,8 +15,8 @@
             </div>
             <div class="flex items-center gap-3">
                 <a href="{{ route('categories.edit', $category) }}"
-                    class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-all hover:-translate-y-0.5 shadow-lg shadow-indigo-100">
-                    <span class="material-symbols-outlined text-xl">edit</span>
+                    class="inline-flex items-center gap-2 px-6 py-3 text-lg bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-all hover:-translate-y-0.5 shadow-lg shadow-indigo-100">
+                    <span class="material-symbols-outlined ">edit</span>
                     Edit
                 </a>
             </div>

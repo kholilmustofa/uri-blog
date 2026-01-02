@@ -66,16 +66,77 @@
                                             <span class="material-symbols-outlined text-lg">edit</span>
                                             Edit
                                         </a>
-                                        <form action="{{ route('categories.destroy', $category) }}" method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete this category?');"
-                                            class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
+                                        <div x-data="{ showModal: false }">
+                                            <button type="button" @click="showModal = true"
                                                 class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-600 font-bold rounded-xl hover:bg-red-100 transition-all text-sm">
                                                 <span class="material-symbols-outlined text-lg">delete</span>
                                             </button>
-                                        </form>
+
+                                            <!-- Delete confirm modal -->
+                                            <template x-teleport="body">
+                                                <div x-show="showModal"
+                                                    x-transition:enter="transition ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0"
+                                                    x-transition:enter-end="opacity-100"
+                                                    x-transition:leave="transition ease-in duration-200"
+                                                    x-transition:leave-start="opacity-100"
+                                                    x-transition:leave-end="opacity-0"
+                                                    class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+                                                    style="display: none;">
+
+                                                    <div @click.away="showModal = false" x-show="showModal"
+                                                        x-transition:enter="transition ease-out duration-300"
+                                                        x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                                                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                                                        x-transition:leave="transition ease-in duration-200"
+                                                        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                                                        x-transition:leave-end="opacity-0 scale-95 translate-y-4"
+                                                        class="relative bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 text-center flex flex-col items-center gap-8 border border-slate-50 w-full max-w-md">
+
+                                                        <div
+                                                            class="w-24 h-24 bg-red-50 text-red-600 rounded-[2rem] flex items-center justify-center shadow-inner">
+                                                            <span
+                                                                class="material-symbols-outlined text-5xl">delete_forever</span>
+                                                        </div>
+
+                                                        <div class="flex flex-col gap-3">
+                                                            <h3
+                                                                class="text-3xl font-black text-[#0f172a] tracking-tight">
+                                                                Delete Category?
+                                                            </h3>
+                                                            <p class="text-slate-500 font-bold leading-relaxed">
+                                                                Are you sure you want to delete <span
+                                                                    class="text-indigo-600">"{{ $category->name }}"</span>?
+                                                                @if ($category->posts_count > 0)
+                                                                    <span class="block mt-2 text-red-600">⚠️ This
+                                                                        category has {{ $category->posts_count }}
+                                                                        posts!</span>
+                                                                @else
+                                                                    This action cannot be undone.
+                                                                @endif
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="flex flex-col sm:flex-row gap-4 w-full">
+                                                            <button @click="showModal = false" type="button"
+                                                                class="flex-1 h-16 bg-slate-50 text-[#0f172a] font-black rounded-2xl hover:bg-slate-100 transition-all uppercase tracking-widest text-xs">
+                                                                Keep it
+                                                            </button>
+                                                            <form action="{{ route('categories.destroy', $category) }}"
+                                                                method="post" class="flex-1">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button type="submit"
+                                                                    @if ($category->posts_count > 0) disabled @endif
+                                                                    class="w-full h-16 bg-red-600 text-white font-black rounded-2xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                                    Delete Now
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
