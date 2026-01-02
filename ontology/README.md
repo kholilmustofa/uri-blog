@@ -25,7 +25,7 @@ Represents the uriblog platform itself.
 - `containsPost`: Links the blog to its posts
 
 ### 2. User
-Represents a registered user who can create and manage posts. This class is a subclass of `foaf:Person`.
+Represents a registered user who can create and manage posts.
 
 **Properties**:
 - `authorName` (string): The full name of the user
@@ -263,9 +263,9 @@ return [
 ## Ontology Design Decisions
 
 1. **Simplified Structure**: Removed Comment and Tag classes as they are not currently implemented in the application
-2. **User Instead of Author**: Renamed to match the Laravel model naming convention
+2. **User-Centric Model**: User class represents registered members who create content
 3. **Added Modern Features**: Included properties for avatar images, post images, and email verification
-4. **FOAF Integration**: User class extends foaf:Person for better semantic web integration
+4. **Self-Contained Ontology**: No external vocabulary dependencies, making it easier to understand and maintain
 5. **Practical Properties**: All properties map directly to database columns for easy synchronization
 
 ## Tools for Working with the Ontology
@@ -292,7 +292,7 @@ To open the ontology:
 - OWL 2 Web Ontology Language: https://www.w3.org/TR/owl2-overview/
 - SPARQL 1.1 Query Language: https://www.w3.org/TR/sparql11-query/
 - Apache Jena Documentation: https://jena.apache.org/documentation/
-- FOAF Vocabulary: http://xmlns.com/foaf/spec/
+- RDF 1.1 Primer: https://www.w3.org/TR/rdf11-primer/
 
 ## License
 

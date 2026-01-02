@@ -6,7 +6,6 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:foaf="http://xmlns.com/foaf/0.1/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.uriblog.com/ontology">
         <dc:creator>Kholil Mustofa</dc:creator>
@@ -344,16 +343,9 @@
     <!-- http://www.uriblog.com/ontology#User -->
 
     <owl:Class rdf:about="http://www.uriblog.com/ontology#User">
-        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
         <rdfs:comment>Represents a registered user who can create and manage posts</rdfs:comment>
         <rdfs:label>User</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://xmlns.com/foaf/0.1/Person -->
-
-    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
 </rdf:RDF>
 
 
