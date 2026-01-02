@@ -79,26 +79,32 @@ class RDFService
     }
 
     /**
-     * Generate authors from users
+     * Generate users
      */
     protected function generateAuthors(): string
     {
         $output = "# ===================================\n";
-        $output .= "# Author Instances\n";
+        $output .= "# User Instances\n";
         $output .= "# ===================================\n\n";
 
         $users = User::all();
 
         foreach ($users as $user) {
-            $authorId = $this->sanitizeId($user->username ?? $user->name);
+            $userId = $this->sanitizeId($user->username ?? $user->name);
             
-            $output .= ":Author_{$authorId} rdf:type :Author ;\n";
+            $output .= ":User_{$userId} rdf:type :User ;\n";
             $output .= "    :authorName \"{$this->escape($user->name)}\" ;\n";
             $output .= "    :authorUsername \"{$this->escape($user->username ?? $user->email)}\" ;\n";
             $output .= "    :authorEmail \"{$this->escape($user->email)}\" ;\n";
             
-            if ($user->bio) {
-                $output .= "    :authorBio \"{$this->escape($user->bio)}\" ;\n";
+            if ($user->avatar) {
+                $output .= "    :authorAvatar \"{$this->escape($user->avatar)}\" ;\n";
+            }
+            
+            if ($user->email_verified_at) {
+                $output .= "    :emailVerified \"true\"^^xsd:boolean ;\n";
+            } else {
+                $output .= "    :emailVerified \"false\"^^xsd:boolean ;\n";
             }
             
             $output = rtrim($output, " ;\n") . " .\n\n";
@@ -148,16 +154,21 @@ class RDFService
 
         foreach ($posts as $post) {
             $postId = $this->sanitizeId($post->slug);
-            $authorId = $this->sanitizeId($post->author->username ?? $post->author->name);
+            $userId = $this->sanitizeId($post->author->username ?? $post->author->name);
             $categoryId = $this->sanitizeId($post->category->slug);
             
             $output .= ":Post_{$postId} rdf:type :Post ;\n";
             $output .= "    :postTitle \"{$this->escape($post->title)}\" ;\n";
             $output .= "    :postSlug \"{$this->escape($post->slug)}\" ;\n";
             $output .= "    :postContent \"{$this->escape(strip_tags($post->body))}\" ;\n";
+            
+            if ($post->image) {
+                $output .= "    :postImage \"{$this->escape($post->image)}\" ;\n";
+            }
+            
             $output .= "    :publishedDate \"{$post->created_at->toIso8601String()}\"^^xsd:dateTime ;\n";
             $output .= "    :updatedDate \"{$post->updated_at->toIso8601String()}\"^^xsd:dateTime ;\n";
-            $output .= "    :hasAuthor :Author_{$authorId} ;\n";
+            $output .= "    :hasAuthor :User_{$userId} ;\n";
             $output .= "    :hasCategory :Category_{$categoryId} ;\n";
             
             $output = rtrim($output, " ;\n") . " .\n\n";

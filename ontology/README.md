@@ -226,6 +226,57 @@ WHERE {
 }
 ```
 
+## Automatic RDF Synchronization
+
+The uriblog application includes an **automatic synchronization system** that exports data to RDF format whenever changes occur in the database. This eliminates the need for manual export in most cases.
+
+### How Auto-Sync Works
+
+The system uses Laravel's Event and Observer patterns:
+
+1. **Model Observers**: Monitor changes to Post, User, and Category models
+2. **Event Dispatch**: When data changes, a `DataChanged` event is fired
+3. **Listener Action**: The `ExportToRDF` listener automatically generates and saves the RDF file
+4. **Real-time Sync**: Changes are reflected in RDF immediately
+
+### Monitored Actions
+
+Auto-sync triggers on these operations:
+- **Post**: Created, Updated, Deleted
+- **User**: Created, Updated, Deleted  
+- **Category**: Created, Updated, Deleted
+
+### Example Workflow
+
+```
+User creates a new post
+    ↓
+PostObserver detects creation
+    ↓
+DataChanged event fired
+    ↓
+ExportToRDF listener activated
+    ↓
+RDF file automatically generated
+    ↓
+storage/rdf/uri-blog-data.ttl updated
+```
+
+### Viewing Auto-Sync Logs
+
+Check the Laravel log for auto-sync activity:
+```bash
+tail -f storage/logs/laravel.log | grep "RDF auto-exported"
+```
+
+### Disabling Auto-Sync
+
+If you need to temporarily disable auto-sync (e.g., during bulk imports), comment out the observer registration in `app/Providers/AppServiceProvider.php`:
+
+```php
+// \App\Models\Post::observe(\App\Observers\PostObserver::class);
+```
+
 ## Exporting Data from Laravel to RDF
 
 The uriblog application includes built-in commands to export database data to RDF format:
