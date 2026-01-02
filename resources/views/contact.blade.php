@@ -4,20 +4,21 @@
             rel="stylesheet" />
     @endpush
 
-    <main class="bg-gray-50/50 min-h-screen">
+    <main class="bg-[#f8fafc] min-h-screen">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
 
                 <!-- Left Column: Heading & Contact Info -->
-                <div class="lg:col-span-5 flex flex-col gap-12">
+                <div class="lg:col-span-5 flex flex-col gap-12 text-[#0f172a]">
 
                     <!-- Page Heading -->
                     <div class="flex flex-col gap-6">
-                        <span class="text-indigo-600 font-bold text-sm tracking-widest uppercase block">Contact Us</span>
-                        <h2 class="text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] tracking-tight">
+                        <span class="text-indigo-600 font-black text-sm tracking-widest uppercase block">Contact
+                            Us</span>
+                        <h2 class="text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
                             Let's start a <br><span class="text-indigo-600">conversation.</span>
                         </h2>
-                        <p class="text-xl text-gray-600 leading-relaxed max-w-md">
+                        <p class="text-xl text-slate-500 leading-relaxed max-w-md font-bold">
                             Have a question about a post, a suggestion for a topic, or just want to say hi? We're here
                             to help you.
                         </p>
@@ -27,40 +28,40 @@
                     <div class="flex flex-col gap-5">
                         <!-- Email Card -->
                         <div
-                            class="flex items-start gap-5 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-indigo-200 transition-all group">
+                            class="flex items-start gap-5 p-6 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm hover:border-indigo-600/50 transition-all group">
                             <div
-                                class="p-4 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                                class="p-4 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
                                 <span class="material-symbols-outlined text-3xl">mail</span>
                             </div>
                             <div>
-                                <h3 class="text-lg font-bold text-gray-900">Email Us</h3>
-                                <p class="text-gray-500 text-sm mt-1">For general inquiries and support</p>
-                                <a class="block mt-2 font-semibold text-indigo-600 hover:text-indigo-700 transition-colors"
+                                <h3 class="text-lg font-black">Email Us</h3>
+                                <p class="text-slate-500 text-sm mt-1 font-bold">For general inquiries and support</p>
+                                <a class="block mt-2 font-black text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-widest text-xs"
                                     href="mailto:hello@uriblog.com">hello@uriblog.com</a>
                             </div>
                         </div>
 
                         <!-- Location Card -->
                         <div
-                            class="flex items-start gap-5 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-indigo-200 transition-all group">
+                            class="flex items-start gap-5 p-6 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm hover:border-indigo-600/50 transition-all group">
                             <div
-                                class="p-4 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                                class="p-4 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
                                 <span class="material-symbols-outlined text-3xl">location_on</span>
                             </div>
                             <div>
-                                <h3 class="text-lg font-bold text-gray-900">Office</h3>
-                                <p class="text-gray-500 text-sm mt-1">Come visit our friendly team</p>
-                                <p class="mt-2 font-semibold text-gray-700 leading-relaxed">123 Blog Street, Web City,
+                                <h3 class="text-lg font-black">Office</h3>
+                                <p class="text-slate-500 text-sm mt-1 font-bold">Come visit our friendly team</p>
+                                <p class="mt-2 font-bold text-[#0f172a] leading-relaxed">123 Blog Street, Web City,
                                     Digital State 90210</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Socials -->
-                    <div class="pt-8 border-t border-gray-200">
-                        <p class="font-bold text-gray-900 mb-6">Follow our journey</p>
+                    <div class="pt-8 border-t border-slate-200">
+                        <p class="font-black mb-6 uppercase tracking-widest text-xs">Follow our journey</p>
                         <div class="flex gap-4">
-                            <a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white border border-gray-200 text-gray-400 hover:text-indigo-600 hover:border-indigo-600 hover:bg-indigo-50 transition-all"
+                            <a class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-white hover:border-indigo-600 hover:bg-indigo-600 transition-all"
                                 href="#">
                                 <span class="sr-only">Twitter</span>
                                 <svg class="h-6 w-6 fill-current" viewbox="0 0 24 24">
@@ -69,7 +70,7 @@
                                     </path>
                                 </svg>
                             </a>
-                            <a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white border border-gray-200 text-gray-400 hover:text-indigo-600 hover:border-indigo-600 hover:bg-indigo-50 transition-all"
+                            <a class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-white hover:border-indigo-600 hover:bg-indigo-600 transition-all"
                                 href="#">
                                 <span class="sr-only">Instagram</span>
                                 <svg class="h-6 w-6 fill-current" viewbox="0 0 24 24">
@@ -78,7 +79,7 @@
                                     </path>
                                 </svg>
                             </a>
-                            <a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white border border-gray-200 text-gray-400 hover:text-indigo-600 hover:border-indigo-600 hover:bg-indigo-50 transition-all"
+                            <a class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-white hover:border-indigo-600 hover:bg-indigo-600 transition-all"
                                 href="#">
                                 <span class="sr-only">LinkedIn</span>
                                 <svg class="h-6 w-6 fill-current" viewbox="0 0 24 24">
@@ -93,47 +94,47 @@
 
                 <!-- Right Column: Form -->
                 <div
-                    class="lg:col-span-7 bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-2xl shadow-gray-200/50">
+                    class="lg:col-span-7 bg-white rounded-[3rem] border border-slate-100 p-8 md:p-12 shadow-2xl shadow-indigo-100/10">
                     <form action="#" method="POST" class="flex flex-col gap-8">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <!-- Name Field -->
                             <div class="flex flex-col gap-3">
-                                <label class="text-gray-900 text-sm font-bold uppercase tracking-wider"
+                                <label class="text-[#0f172a] text-xs font-black uppercase tracking-widest"
                                     for="name">Full Name</label>
                                 <input
-                                    class="w-full rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 h-14 px-5 text-gray-900 placeholder:text-gray-400 transition-all outline-none"
+                                    class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 h-16 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
                                     id="name" placeholder="Ex. John Doe" type="text" required>
                             </div>
                             <!-- Email Field -->
                             <div class="flex flex-col gap-3">
-                                <label class="text-gray-900 text-sm font-bold uppercase tracking-wider"
+                                <label class="text-[#0f172a] text-xs font-black uppercase tracking-widest"
                                     for="email">Email Address</label>
                                 <input
-                                    class="w-full rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 h-14 px-5 text-gray-900 placeholder:text-gray-400 transition-all outline-none"
+                                    class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 h-16 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
                                     id="email" placeholder="you@company.com" type="email" required>
                             </div>
                         </div>
                         <!-- Subject Field -->
                         <div class="flex flex-col gap-3">
-                            <label class="text-gray-900 text-sm font-bold uppercase tracking-wider"
+                            <label class="text-[#0f172a] text-xs font-black uppercase tracking-widest"
                                 for="subject">Subject</label>
                             <input
-                                class="w-full rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 h-14 px-5 text-gray-900 placeholder:text-gray-400 transition-all outline-none"
+                                class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 h-16 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
                                 id="subject" placeholder="What is this regarding?" type="text" required>
                         </div>
                         <!-- Message Field -->
                         <div class="flex flex-col gap-3">
-                            <label class="text-gray-900 text-sm font-bold uppercase tracking-wider"
+                            <label class="text-[#0f172a] text-xs font-black uppercase tracking-widest"
                                 for="message">Message</label>
                             <textarea
-                                class="w-full rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 p-5 text-gray-900 placeholder:text-gray-400 transition-all outline-none resize-none min-h-[180px]"
+                                class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 p-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none resize-none min-h-[180px] font-bold"
                                 id="message" placeholder="Type your message here..." rows="6" required></textarea>
                         </div>
                         <!-- Submit Button -->
                         <div class="pt-4">
                             <button
-                                class="w-full md:w-auto px-10 h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-3"
+                                class="w-full md:w-auto px-12 h-16 bg-[#0f172a] hover:bg-black text-white font-black rounded-2xl shadow-xl shadow-indigo-100/10 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-3 uppercase tracking-widest text-sm"
                                 type="submit">
                                 <span>Send Message</span>
                                 <span class="material-symbols-outlined text-2xl">send</span>
