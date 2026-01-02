@@ -228,7 +228,11 @@ WHERE {
 
 ## Automatic RDF Synchronization
 
-The uriblog application includes an **automatic synchronization system** that exports data to RDF format whenever changes occur in the database. This eliminates the need for manual export in most cases.
+The uriblog application includes a **complete automatic synchronization system** that:
+1. Exports data to RDF format whenever changes occur
+2. Automatically syncs to Fuseki if the server is available
+
+This eliminates the need for manual export and sync in most cases.
 
 ### How Auto-Sync Works
 
@@ -236,8 +240,11 @@ The system uses Laravel's Event and Observer patterns:
 
 1. **Model Observers**: Monitor changes to Post, User, and Category models
 2. **Event Dispatch**: When data changes, a `DataChanged` event is fired
-3. **Listener Action**: The `ExportToRDF` listener automatically generates and saves the RDF file
-4. **Real-time Sync**: Changes are reflected in RDF immediately
+3. **Listener Action**: The `ExportToRDF` listener:
+   - Generates and saves the RDF file
+   - Checks if Fuseki is available
+   - Uploads to Fuseki automatically if online
+4. **Real-time Sync**: Changes are reflected in both RDF file and Fuseki immediately
 
 ### Monitored Actions
 
@@ -260,14 +267,46 @@ ExportToRDF listener activated
 RDF file automatically generated
     ↓
 storage/rdf/uri-blog-data.ttl updated
+    ↓
+Check if Fuseki is online
+    ↓
+If online: Upload to Fuseki automatically
+    ↓
+Done! (No manual intervention needed)
 ```
 
 ### Viewing Auto-Sync Logs
 
 Check the Laravel log for auto-sync activity:
 ```bash
-tail -f storage/logs/laravel.log | grep "RDF auto-exported"
+tail -f storage/logs/laravel.log | grep "RDF auto"
 ```
+
+You'll see logs like:
+```
+RDF auto-exported: Post created
+RDF auto-synced to Fuseki: Post created
+```
+
+### When Manual Sync is Needed
+
+You only need to run manual commands if:
+
+1. **Fuseki was offline** during data changes:
+   ```bash
+   php artisan rdf:sync
+   ```
+
+2. **Bulk import** of existing data:
+   ```bash
+   php artisan rdf:export
+   php artisan rdf:sync
+   ```
+
+3. **Force re-export** everything:
+   ```bash
+   php artisan rdf:sync --export --clear
+   ```
 
 ### Disabling Auto-Sync
 
@@ -287,6 +326,7 @@ php artisan rdf:export
 ```
 
 This will generate RDF/Turtle files in the `storage/rdf/` directory.
+
 
 ### Sync with Fuseki
 ```bash

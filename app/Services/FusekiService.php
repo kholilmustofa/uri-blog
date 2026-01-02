@@ -168,11 +168,11 @@ ORDER BY DESC(?publishedDate)
         $sparql = $prefixes . "
 SELECT 
   (COUNT(DISTINCT ?post) AS ?totalPosts)
-  (COUNT(DISTINCT ?author) AS ?totalAuthors)
+  (COUNT(DISTINCT ?user) AS ?totalUsers)
   (COUNT(DISTINCT ?category) AS ?totalCategories)
 WHERE {
   OPTIONAL { ?post rdf:type :Post }
-  OPTIONAL { ?author rdf:type :Author }
+  OPTIONAL { ?user rdf:type :User }
   OPTIONAL { ?category rdf:type :Category }
 }
 ";
@@ -183,7 +183,7 @@ WHERE {
             $data = $result['results']['bindings'][0];
             return [
                 'posts' => (int) $data['totalPosts']['value'],
-                'authors' => (int) $data['totalAuthors']['value'],
+                'authors' => (int) $data['totalUsers']['value'],
                 'categories' => (int) $data['totalCategories']['value'],
             ];
         }
