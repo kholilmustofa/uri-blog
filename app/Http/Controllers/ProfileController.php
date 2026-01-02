@@ -28,47 +28,32 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        // $request->user()->fill($request->validated());
+        $user = $request->user();
         $validated = $request->validated();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Remove avatar from validated data initially so we don't overwrite if empty
+        unset($validated['avatar']);
+
+        $user->fill($validated);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        // if ($request->hasFile('avatar')) {
-        //     if(!empty($request->user()->avatar)) {
-        //         Storage::disk('public')->delete($request->user()->avatar);
-        //     }
-        //     $path = $request->file('avatar')->store('img', 'public');
-        //     $validated['avatar'] = $path;
-        // }
-
-        if ($request->avatar) {
-            if (!empty($request->user()->avatar)) {
-                Storage::disk('public')->delete($request->user()->avatar);
+        if ($request->hasFile('avatar')) {
+            if (!empty($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
             }
 
-            $newFileName = Str::after($request->avatar, 'tmp/');
-
-            Storage::disk('public')->move($request->avatar, "img/$newFileName");
-
-            $validated['avatar'] = "img/$newFileName";
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $path;
         }
 
-        // $request->user()->save();
-        $request->user()->update($validated);
+        $user->save();
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
 
-    public function upload(Request $request)
-    {
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('tmp', 'public');
-        }
-
-        return $path;
-    }
 
     /**
      * Delete the user's account.

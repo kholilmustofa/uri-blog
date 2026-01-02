@@ -21,7 +21,7 @@ class PostDashboardController extends Controller
             $posts->where('title', 'like', '%' . request('keyword') . '%');
         }
 
-        return view('dashboard.index', ['posts' => $posts->paginate(5)->withQueryString()]);
+        return view('dashboard.index', ['posts' => $posts->paginate(5)->onEachSide(0)->withQueryString()]);
     }
 
     /**
@@ -32,40 +32,40 @@ class PostDashboardController extends Controller
         return view('dashboard.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //validation
-        // $request->validate([
-        //     'title' => 'required|unique:posts|min:4|max:255',
-        //     'category_id' => 'required',
-        //     'body' => 'required'
-        // ]);
-
         Validator::make($request->all(), [
             'title' => 'required|unique:posts|min:4|max:255',
             'category_id' => 'required',
+            'image' => 'image|file|max:2048',
             'body' => 'required|min:20'
         ], [
             'title.required' => 'Field :attribute harus diisi',
             'category_id.required' => 'Pilih salah satu :attribute',
+            'image.image' => 'File harus berupa gambar',
+            'image.max' => 'Ukuran gambar maksimal 2MB',
             'body.required' => ':attribute ga boleh kosong',
             'body.min' => ':attribute minimal harus :min karakter atau lebih'
         ], [
             'title' => 'judul',
             'category_id' => 'kategori',
+            'image' => 'gambar',
             'body' => 'tulisan'
         ])->validate();
 
-        Post::create([
+        $validatedData = [
             'title' => $request->title,
             'author_id' => Auth::user()->id,
             'category_id' => $request->category_id,
             'slug' => Str::slug($request->title),
             'body' => $request->body
-        ]);
+        ];
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images', 'public');
+        }
+
+        Post::create($validatedData);
 
         return redirect('/dashboard')->with(['success' => 'your post has been saved!']);
     }
@@ -94,16 +94,26 @@ class PostDashboardController extends Controller
         $request->validate([
             'title' => 'required|min:4|max:255|unique:posts,title,' . $post->id,
             'category_id' => 'required',
+            'image' => 'image|file|max:2048',
             'body' => 'required'
         ]);
 
-        $post->update([
+        $validatedData = [
             'title' => $request->title,
             'author_id' => Auth::user()->id,
             'category_id' => $request->category_id,
             'slug' => Str::slug($request->title),
             'body' => $request->body
-        ]);
+        ];
+
+        if ($request->file('image')) {
+            if ($post->image) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($post->image);
+            }
+            $validatedData['image'] = $request->file('image')->store('post-images', 'public');
+        }
+
+        $post->update($validatedData);
 
         return redirect('/dashboard')->with(['success' => 'your post has been updated!']);
     }
@@ -113,6 +123,9 @@ class PostDashboardController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->image) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($post->image);
+        }
         $post->delete();
         return redirect('/dashboard')->with(['success' => 'your post has been removed!']);
     }

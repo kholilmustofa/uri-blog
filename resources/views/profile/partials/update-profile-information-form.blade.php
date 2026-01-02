@@ -1,15 +1,12 @@
 @push('style')
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
 @endpush
 
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
+    <header class="mb-8">
+        <h2 class="text-xl font-black text-[#0f172a] uppercase tracking-widest">
             {{ __('Profile Information') }}
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-2 text-sm text-slate-500 font-bold leading-relaxed">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -18,76 +15,101 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+    <form method="post" action="{{ route('profile.update') }}" class="space-y-8" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
-                required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="flex flex-col sm:flex-row items-center gap-8 pb-8 border-b border-slate-50">
+            <div class="relative group">
+                <div
+                    class="w-32 h-32 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-all group-hover:border-indigo-100">
+                    <img id="avatar-preview" class="w-full h-full object-cover"
+                        src="{{ $user->avatar ? asset('storage/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=EEF2FF&color=4F46E5' }}"
+                        alt="{{ $user->name }}">
+                </div>
+                <label for="avatar"
+                    class="absolute bottom-0 right-0 w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-indigo-600 shadow-lg cursor-pointer hover:bg-indigo-50 transition-all">
+                    <span class="material-symbols-outlined text-xl">photo_camera</span>
+                    <input id="avatar" name="avatar" type="file" class="hidden"
+                        accept="image/png, image/jpeg, image/jpg">
+                </label>
+            </div>
+            <div class="flex-1 text-center sm:text-left">
+                <h4 class="text-lg font-black text-[#0f172a]">Public Profile Photo</h4>
+                <p class="text-sm text-slate-400 font-medium">PNG or JPG. Max 2MB.</p>
+                @error('avatar')
+                    <p class="mt-2 text-xs text-red-600 font-bold">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
 
-        <div>
-            <x-input-label for="username" :value="__('Username')" />
-            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)"
-                required autofocus autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-2">
+                <label for="name"
+                    class="text-[#0f172a] text-[10px] font-black uppercase tracking-widest block">{{ __('Full Name') }}</label>
+                <input id="name" name="name" type="text"
+                    class="w-full h-14 rounded-2xl bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 px-6 text-[#0f172a] transition-all outline-none font-bold"
+                    value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
+                @error('name')
+                    <p class="text-xs text-red-600 font-bold mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="space-y-2">
+                <label for="username"
+                    class="text-[#0f172a] text-[10px] font-black uppercase tracking-widest block">{{ __('Username') }}</label>
+                <input id="username" name="username" type="text"
+                    class="w-full h-14 rounded-2xl bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 px-6 text-[#0f172a] transition-all outline-none font-bold"
+                    value="{{ old('username', $user->username) }}" required autocomplete="username">
+                @error('username')
+                    <p class="text-xs text-red-600 font-bold mt-1">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"
-                required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="space-y-2">
+            <label for="email"
+                class="text-[#0f172a] text-[10px] font-black uppercase tracking-widest block">{{ __('Email Address') }}</label>
+            <input id="email" name="email" type="email"
+                class="w-full h-14 rounded-2xl bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 px-6 text-[#0f172a] transition-all outline-none font-bold"
+                value="{{ old('email', $user->email) }}" required autocomplete="username">
+            @error('email')
+                <p class="text-xs text-red-600 font-bold mt-1">{{ $message }}</p>
+            @enderror
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
+                <div class="mt-4 p-4 bg-amber-50 rounded-2xl border border-amber-100">
+                    <p class="text-sm text-amber-800 font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">warning</span>
                         {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification"
-                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
                     </p>
+                    <button form="send-verification"
+                        class="mt-2 text-xs text-amber-900 font-black uppercase tracking-widest hover:underline">
+                        {{ __('Click here to re-send the verification email.') }}
+                    </button>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                        <p class="mt-2 font-black text-xs text-green-600 uppercase tracking-widest">
+                            {{ __('A new verification link has been sent.') }}
                         </p>
                     @endif
                 </div>
             @endif
         </div>
 
-        {{-- upload avatar --}}
-        <div>
-            <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-white" for="avatar">Upload
-                Avatar</label>
-            <input
-                class="@error('avatar') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                aria-describedby="avatar_help" id="avatar" name="avatar" type="file"
-                accept="image/png, image/jpeg, image/jpg">
-            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="avatar_help">.png or .jpg</div>
-            @error('avatar')
-                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div>
-            <img class="w-20 h-20 rounded-sm"
-                src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/avatar.png') }}"
-                alt="{{ $user->name }}" id="avatar-preview">
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="flex items-center gap-4 pt-4">
+            <button type="submit"
+                class="h-14 px-10 bg-indigo-600 text-white font-black rounded-2xl shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all active:scale-95 uppercase tracking-widest text-xs flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">save</span>
+                {{ __('Save Changes') }}
+            </button>
 
             @if (session('status') === 'profile-updated')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="flex items-center gap-2 text-green-600 font-bold text-sm">
+                    <span class="material-symbols-outlined text-lg">check_circle</span>
+                    {{ __('Saved successfully.') }}
+                </div>
             @endif
         </div>
     </form>
@@ -108,37 +130,5 @@
             }
         }
         input.addEventListener("change", previewPhoto);
-    </script>
-
-    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-
-    <script>
-        FilePond.registerPlugin(FilePondPluginImageTransform);
-        FilePond.registerPlugin(FilePondPluginImageResize);
-        FilePond.registerPlugin(FilePondPluginFileValidateSize);
-        FilePond.registerPlugin(FilePondPluginFileValidateType);
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        // Get a reference to the file input element
-        const inputElement = document.querySelector('#avatar');
-
-        // Create a FilePond instance
-        const pond = FilePond.create(inputElement, {
-            acceptedFileTypes: ['image/jpg', 'image/png', 'image/jpeg'],
-            maxFileSize: '5mb',
-            ImageResizeTargetWidth: '600',
-            ImageResizeMode: 'contain',
-            ImageResizeUpscale: false,
-            server: {
-                url: '/upload',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            }
-        });
     </script>
 @endpush

@@ -30,7 +30,7 @@
     <x-navbar />
 
     <!-- Main Content -->
-    <main role="main" class="flex-grow pt-16">
+    <main role="main" class="flex-grow">
         {{ $slot }}
     </main>
 

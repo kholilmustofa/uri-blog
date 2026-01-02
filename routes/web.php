@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', function () {
-    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString();
+    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->onEachSide(0)->withQueryString();
     $categories = Category::withCount('posts')->get();
 
     return view('posts', [
@@ -77,8 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/upload', [ProfileController::class, 'upload' ]);
-});
+    });
 
 // Semantic Web Routes
 use App\Http\Controllers\SemanticController;
