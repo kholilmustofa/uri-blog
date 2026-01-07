@@ -211,8 +211,11 @@ WHERE {
     {
         $output = '';
         foreach (config('semantic.prefixes') as $prefix => $uri) {
-            $prefixName = $prefix === '' ? ':' : $prefix;
-            $output .= "PREFIX {$prefixName}: <{$uri}>\n";
+            if ($prefix === '') {
+                $output .= "PREFIX : <{$uri}>\n";
+            } else {
+                $output .= "PREFIX {$prefix}: <{$uri}>\n";
+            }
         }
         return $output . "\n";
     }
@@ -230,5 +233,103 @@ WHERE {
             'update_endpoint' => $this->host . '/' . $this->dataset . '/update',
             'data_endpoint' => $this->host . '/' . $this->dataset . '/data',
         ];
+    }
+
+    /**
+     * Search posts using SPARQL
+     */
+    public function searchPosts(?string $search = null, ?string $category = null, ?string $author = null, int $limit = 6): ?array
+    {
+        $prefixes = $this->buildPrefixes();
+        
+        // Build filter conditions
+        $filters = [];
+        
+        if ($search) {
+            $search = addslashes($search);
+            $filters[] = "(regex(?title, \"{$search}\", \"i\") || regex(?content, \"{$search}\", \"i\"))";
+        }
+        
+        if ($category) {
+            $category = addslashes($category);
+            $filters[] = "regex(?categoryName, \"{$category}\", \"i\")";
+        }
+        
+        if ($author) {
+            $author = addslashes($author);
+            $filters[] = "regex(?authorName, \"{$author}\", \"i\")";
+        }
+        
+        $filterString = !empty($filters) ? 'FILTER (' . implode(' && ', $filters) . ')' : '';
+        
+        $sparql = $prefixes . "
+SELECT DISTINCT ?post ?title ?slug ?content ?publishedDate ?authorName ?categoryName ?categoryColor
+WHERE {
+  ?post rdf:type :Post .
+  ?post :postTitle ?title .
+  ?post :postSlug ?slug .
+  ?post :postContent ?content .
+  ?post :publishedDate ?publishedDate .
+  ?post :hasAuthor ?author .
+  ?author :authorName ?authorName .
+  ?post :hasCategory ?category .
+  ?category :categoryName ?categoryName .
+  OPTIONAL { ?category :categoryColor ?categoryColor }
+  {$filterString}
+}
+ORDER BY DESC(?publishedDate)
+LIMIT {$limit}
+";
+
+        Log::info('SPARQL Query:', ['query' => $sparql]);
+
+        $result = $this->query($sparql);
+        
+        if ($result) {
+            Log::info('SPARQL Result received', [
+                'has_results' => isset($result['results']),
+                'has_bindings' => isset($result['results']['bindings']),
+                'bindings_count' => isset($result['results']['bindings']) ? count($result['results']['bindings']) : 0
+            ]);
+        } else {
+            Log::warning('SPARQL Result is null');
+        }
+        
+        if ($result && isset($result['results']['bindings'])) {
+            Log::info('Returning SPARQL results', ['count' => count($result['results']['bindings'])]);
+            return $result['results']['bindings'];
+        }
+
+        Log::warning('No SPARQL bindings found, returning null');
+        return null;
+    }
+
+    /**
+     * Get all categories for filter
+     */
+    public function getAllCategories(): array
+    {
+        $prefixes = $this->buildPrefixes();
+        
+        $sparql = $prefixes . "
+SELECT DISTINCT ?categoryName (COUNT(?post) as ?postCount)
+WHERE {
+  ?category rdf:type :Category .
+  ?category :categoryName ?categoryName .
+  OPTIONAL {
+    ?post :hasCategory ?category .
+  }
+}
+GROUP BY ?categoryName
+ORDER BY ?categoryName
+";
+
+        $result = $this->query($sparql);
+        
+        if ($result && isset($result['results']['bindings'])) {
+            return $result['results']['bindings'];
+        }
+
+        return [];
     }
 }

@@ -26,16 +26,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts', function () {
-    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->onEachSide(0)->withQueryString();
-    $categories = Category::withCount('posts')->get();
-
-    return view('posts', [
-        'title' => 'Blog',
-        'posts' => $posts,
-        'categories' => $categories
-    ]);
-});
+// Posts with Semantic Search
+use App\Http\Controllers\PostController;
+Route::get('/posts', [PostController::class, 'index']);
 
 Route::get('/posts/{post:slug}', function (Post $post) {
     // Get related posts from same category

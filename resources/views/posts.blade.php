@@ -15,6 +15,13 @@
                     </h1>
                     <p class="text-slate-500 text-xl font-normal leading-relaxed">
                         Discover insights, tutorials, and news from the team. Stay updated with the tech world.
+                        @if (isset($usingSemanticSearch) && $usingSemanticSearch)
+                            <span
+                                class="inline-flex items-center gap-1 px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-bold ml-2">
+                                <span class="material-symbols-outlined text-sm">database</span>
+                                Semantic Search Active
+                            </span>
+                        @endif
                     </p>
                 </div>
                 <div class="w-full lg:max-w-md">
