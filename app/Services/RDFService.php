@@ -84,7 +84,7 @@ class RDFService
     protected function generateAuthors(): string
     {
         $output = "# ===================================\n";
-        $output .= "# User Instances\n";
+        $output .= "# Author Instances\n";
         $output .= "# ===================================\n\n";
 
         $users = User::all();
