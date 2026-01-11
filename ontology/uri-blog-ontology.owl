@@ -73,7 +73,7 @@
     <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#hasAuthor">
         <owl:inverseOf rdf:resource="http://www.uriblog.com/ontology#writtenBy"/>
         <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:comment>Relates a post to its author</rdfs:comment>
         <rdfs:label>has author</rdfs:label>
     </owl:ObjectProperty>
@@ -94,9 +94,9 @@
     <!-- http://www.uriblog.com/ontology#writtenBy -->
 
     <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#writtenBy">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:comment>Relates a user to their posts</rdfs:comment>
+        <rdfs:comment>Relates a author to their posts</rdfs:comment>
         <rdfs:label>written by</rdfs:label>
     </owl:ObjectProperty>
     
@@ -116,7 +116,7 @@
     <!-- http://www.uriblog.com/ontology#authorAvatar -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorAvatar">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment>Path to the author's avatar image</rdfs:comment>
         <rdfs:label>author avatar</rdfs:label>
@@ -127,7 +127,7 @@
     <!-- http://www.uriblog.com/ontology#authorEmail -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorEmail">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label>author email</rdfs:label>
     </owl:DatatypeProperty>
@@ -137,7 +137,7 @@
     <!-- http://www.uriblog.com/ontology#authorName -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorName">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label>author name</rdfs:label>
     </owl:DatatypeProperty>
@@ -147,7 +147,7 @@
     <!-- http://www.uriblog.com/ontology#authorUsername -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#authorUsername">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label>author username</rdfs:label>
     </owl:DatatypeProperty>
@@ -190,9 +190,9 @@
     <!-- http://www.uriblog.com/ontology#emailVerified -->
 
     <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#emailVerified">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#User"/>
+        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-        <rdfs:comment>Indicates if user's email has been verified</rdfs:comment>
+        <rdfs:comment>Indicates if author's email has been verified</rdfs:comment>
         <rdfs:label>email verified</rdfs:label>
     </owl:DatatypeProperty>
     
@@ -293,11 +293,11 @@
     
 
 
-    <!-- http://www.uriblog.com/ontology#User -->
+    <!-- http://www.uriblog.com/ontology#Author -->
 
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#User">
-        <rdfs:comment>Represents a registered user who can create and manage posts</rdfs:comment>
-        <rdfs:label>User</rdfs:label>
+    <owl:Class rdf:about="http://www.uriblog.com/ontology#Author">
+        <rdfs:comment>Represents an author who can create and manage posts</rdfs:comment>
+        <rdfs:label>Author</rdfs:label>
     </owl:Class>
 </rdf:RDF>
 
