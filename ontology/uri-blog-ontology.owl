@@ -67,16 +67,6 @@
     
 
 
-    <!-- http://www.uriblog.com/ontology#containsPost -->
-
-    <owl:ObjectProperty rdf:about="http://www.uriblog.com/ontology#containsPost">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
-        <rdfs:range rdf:resource="http://www.uriblog.com/ontology#Post"/>
-        <rdfs:comment>Relates a blog to its posts</rdfs:comment>
-        <rdfs:label>contains post</rdfs:label>
-    </owl:ObjectProperty>
-    
-
 
     <!-- http://www.uriblog.com/ontology#hasAuthor -->
 
@@ -163,35 +153,6 @@
     </owl:DatatypeProperty>
     
 
-
-    <!-- http://www.uriblog.com/ontology#blogDescription -->
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogDescription">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>blog description</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.uriblog.com/ontology#blogName -->
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogName">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>blog name</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.uriblog.com/ontology#blogURL -->
-
-    <owl:DatatypeProperty rdf:about="http://www.uriblog.com/ontology#blogURL">
-        <rdfs:domain rdf:resource="http://www.uriblog.com/ontology#Blog"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
-        <rdfs:label>blog URL</rdfs:label>
-    </owl:DatatypeProperty>
-    
 
 
     <!-- http://www.uriblog.com/ontology#categoryColor -->
@@ -312,14 +273,6 @@
 
     
 
-
-    <!-- http://www.uriblog.com/ontology#Blog -->
-
-    <owl:Class rdf:about="http://www.uriblog.com/ontology#Blog">
-        <rdfs:comment>Represents the uriblog platform itself</rdfs:comment>
-        <rdfs:label>Blog</rdfs:label>
-    </owl:Class>
-    
 
 
     <!-- http://www.uriblog.com/ontology#Category -->
