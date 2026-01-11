@@ -92,7 +92,7 @@ class RDFService
         foreach ($users as $user) {
             $userId = $this->sanitizeId($user->username ?? $user->name);
             
-            $output .= ":User_{$userId} rdf:type :User ;\n";
+            $output .= ":Author_{$userId} rdf:type :Author ;\n";
             $output .= "    :authorName \"{$this->escape($user->name)}\" ;\n";
             $output .= "    :authorUsername \"{$this->escape($user->username ?? $user->email)}\" ;\n";
             $output .= "    :authorEmail \"{$this->escape($user->email)}\" ;\n";
@@ -168,7 +168,7 @@ class RDFService
             
             $output .= "    :publishedDate \"{$post->created_at->toIso8601String()}\"^^xsd:dateTime ;\n";
             $output .= "    :updatedDate \"{$post->updated_at->toIso8601String()}\"^^xsd:dateTime ;\n";
-            $output .= "    :hasAuthor :User_{$userId} ;\n";
+            $output .= "    :hasAuthor :Author_{$userId} ;\n";
             $output .= "    :hasCategory :Category_{$categoryId} ;\n";
             
             $output = rtrim($output, " ;\n") . " .\n\n";

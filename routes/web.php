@@ -75,17 +75,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
 });
 
-// Semantic Web Routes
-use App\Http\Controllers\SemanticController;
-
-Route::prefix('semantic')->name('semantic.')->group(function () {
-    Route::get('/', [SemanticController::class, 'index'])->name('index');
-    Route::get('/posts', [SemanticController::class, 'posts'])->name('posts');
-    Route::post('/query', [SemanticController::class, 'query'])->name('query');
-    Route::post('/export', [SemanticController::class, 'export'])->name('export');
-    Route::post('/sync', [SemanticController::class, 'sync'])->name('sync');
-    Route::get('/download', [SemanticController::class, 'download'])->name('download');
-});
-
 require __DIR__ . '/auth.php';
 
