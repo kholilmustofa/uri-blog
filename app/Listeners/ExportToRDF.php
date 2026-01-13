@@ -37,6 +37,16 @@ class ExportToRDF
 
             // Auto-sync to Fuseki if available
             if ($this->fusekiService->isAvailable()) {
+                // Clear existing data first (especially important for deletions)
+                $cleared = $this->fusekiService->clearDataset();
+                
+                if ($cleared) {
+                    Log::info("Fuseki data cleared before sync");
+                } else {
+                    Log::warning("Failed to clear Fuseki data, proceeding with upload anyway");
+                }
+                
+                // Upload fresh data
                 $success = $this->fusekiService->uploadRDF($filepath);
                 
                 if ($success) {

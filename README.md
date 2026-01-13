@@ -10,16 +10,18 @@ A modern content management platform built with Laravel 12, featuring a sophisti
 - **User Authentication**: Secure login, registration, and email verification
 - **Profile Management**: Avatar uploads, password changes, and personal info updates
 - **Responsive Design**: Mobile-first approach for all devices
+- **Hybrid Search**: SPARQL semantic search with SQL fallback for reliability
 - **Semantic Web Integration**: RDF export and SPARQL querying capabilities
 
 ## 🧬 Semantic Web Implementation
 
 This project includes a **complete Semantic Web implementation** with:
-- OWL 2 ontology for blog domain
-- Automatic RDF export from MySQL database
-- Real-time synchronization with Apache Jena Fuseki
+- OWL 2 ontology for blog domain (Post, Author, Category)
+- **Automatic RDF export** from MySQL database
+- **Real-time synchronization** with Apache Jena Fuseki (auto-clears and uploads on data changes)
+- **Hybrid search system**: Uses SPARQL when Fuseki is online, falls back to SQL when offline
 - SPARQL endpoint for advanced queries
-- Observer pattern for auto-sync
+- Observer pattern for auto-sync on create/update/delete operations
 
 > 📖 **For complete semantic web documentation, setup guides, and SPARQL examples:**  
 > **See [ontology/README.md](ontology/README.md)**

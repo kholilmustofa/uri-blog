@@ -13,31 +13,19 @@ The uriblog ontology is a formal representation of the knowledge domain for the 
 
 ## Classes
 
-### 1. Blog
-Represents the uriblog platform itself.
+### 1. Author
+Represents a registered author who can create and manage posts.
 
 **Properties**:
-- `blogName` (string): The name of the blog
-- `blogDescription` (string): A description of the blog
-- `blogURL` (anyURI): The URL of the blog website
-
-**Relationships**:
-- `containsPost`: Links the blog to its posts
-
-### 2. User
-Represents a registered user who can create and manage posts.
-
-**Properties**:
-- `authorName` (string): The full name of the user
-- `authorUsername` (string): The unique username
+- `authorName` (string): The full name of the author
 - `authorEmail` (string): The email address
-- `authorAvatar` (string): Path to the user's avatar image
-- `emailVerified` (boolean): Indicates if the user's email has been verified
+- `authorAvatar` (string): Path to the author's avatar image
+- `emailVerified` (boolean): Indicates if the author's email has been verified
 
 **Relationships**:
-- `writtenBy`: Links the user to posts they have written
+- `writtenBy`: Links the author to posts they have written
 
-### 3. Post
+### 2. Post
 Represents a blog post article with title, content, and metadata.
 
 **Properties**:
@@ -49,11 +37,11 @@ Represents a blog post article with title, content, and metadata.
 - `updatedDate` (dateTime): Date and time when the post was last updated
 
 **Relationships**:
-- `hasAuthor`: Links the post to its author (User)
+- `hasAuthor`: Links the post to its author (Author)
 - `hasCategory`: Links the post to its category
 - `belongsToCategory`: Inverse relationship to category
 
-### 4. Category
+### 3. Category
 Represents a content category for organizing posts.
 
 **Properties**:
@@ -68,14 +56,14 @@ Represents a content category for organizing posts.
 
 ### hasAuthor
 - **Domain**: Post
-- **Range**: User
+- **Range**: Author
 - **Description**: Relates a post to its author
 - **Inverse**: writtenBy
 
 ### writtenBy
-- **Domain**: User
+- **Domain**: Author
 - **Range**: Post
-- **Description**: Relates a user to their posts
+- **Description**: Relates an author to their posts
 - **Inverse**: hasAuthor
 
 ### hasCategory
@@ -89,11 +77,6 @@ Represents a content category for organizing posts.
 - **Range**: Category
 - **Description**: Relates a post to the category it belongs to
 - **Inverse**: hasCategory
-
-### containsPost
-- **Domain**: Blog
-- **Range**: Post
-- **Description**: Relates the blog to its posts
 
 
 ## Usage with Apache Jena Fuseki
@@ -229,15 +212,15 @@ The system uses Laravel's Event and Observer patterns:
 
 Auto-sync triggers on these operations:
 - **Post**: Created, Updated, Deleted
-- **User**: Created, Updated, Deleted  
+- **Author**: Created, Updated, Deleted  
 - **Category**: Created, Updated, Deleted
 
 ### Example Workflow
 
 ```
-User creates a new post
+User creates/updates/deletes a post
     ↓
-PostObserver detects creation
+PostObserver detects change
     ↓
 DataChanged event fired
     ↓
@@ -249,7 +232,9 @@ storage/rdf/uri-blog-data.ttl updated
     ↓
 Check if Fuseki is online
     ↓
-If online: Upload to Fuseki automatically
+If online: Clear existing Fuseki data (CLEAR ALL)
+    ↓
+Upload fresh RDF data to Fuseki
     ↓
 Done! (No manual intervention needed)
 ```
@@ -332,11 +317,12 @@ return [
 
 ## Ontology Design Decisions
 
-1. **Simplified Structure**: Removed Comment and Tag classes as they are not currently implemented in the application
-2. **User-Centric Model**: User class represents registered members who create content
+1. **Simplified Structure**: Removed Blog, Comment, and Tag classes as they are not currently implemented in the application
+2. **Author-Centric Model**: Author class represents registered members who create content (changed from User for clarity)
 3. **Added Modern Features**: Included properties for avatar images, post images, and email verification
 4. **Self-Contained Ontology**: No external vocabulary dependencies, making it easier to understand and maintain
 5. **Practical Properties**: All properties map directly to database columns for easy synchronization
+6. **Auto-Sync System**: Integrated event-driven synchronization ensures Fuseki data stays current with database changes
 
 ## Tools for Working with the Ontology
 
