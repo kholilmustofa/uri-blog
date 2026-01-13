@@ -22,3 +22,8 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# RDF Export Files (generated data, should not be committed)
+/storage/app/rdf/*.ttl
+/storage/app/rdf/*.rdf
+/storage/app/rdf/*.owl
