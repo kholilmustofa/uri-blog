@@ -18,7 +18,13 @@ class PostDashboardController extends Controller
         $posts = Post::latest()->where('author_id', Auth::user()->id);
 
         if (request('keyword')) {
-            $posts->where('title', 'like', '%' . request('keyword') . '%');
+            $keyword = request('keyword');
+            $posts->where(function($query) use ($keyword) {
+                $query->where('title', 'like', '%' . $keyword . '%')
+                      ->orWhereHas('category', function($q) use ($keyword) {
+                          $q->where('name', 'like', '%' . $keyword . '%');
+                      });
+            });
         }
 
         return view('dashboard.index', ['posts' => $posts->paginate(5)->onEachSide(0)->withQueryString()]);

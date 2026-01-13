@@ -28,14 +28,14 @@
                 </div>
                 <input type="text" id="simple-search" name="keyword"
                     class="w-full h-14 pl-14 pr-6 rounded-2xl bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 text-sm text-[#0f172a] placeholder-slate-400 font-bold transition-all outline-none"
-                    placeholder="Search through your stories..." value="{{ request('keyword') }}">
+                    placeholder="Search by title or category..." value="{{ request('keyword') }}">
             </form>
         </div>
         <div class="w-full md:w-auto flex flex-col md:flex-row gap-4 shrink-0">
             <a href="/dashboard/create"
                 class="flex items-center justify-center h-14 px-8 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl shadow-xl shadow-indigo-100 transform active:scale-95 transition-all gap-2 uppercase tracking-widest text-xs">
                 <span class="material-symbols-outlined text-xl">add</span>
-                Write New Story
+                New Post
             </a>
         </div>
     </div>
@@ -116,7 +116,7 @@
                                         </div>
 
                                         <div class="flex flex-col gap-3">
-                                            <h3 class="text-3xl font-black text-[#0f172a] tracking-tight">Delete Story?
+                                            <h3 class="text-3xl font-black text-[#0f172a] tracking-tight">Delete Post?
                                             </h3>
                                             <p class="text-slate-500 font-bold leading-relaxed">
                                                 Are you sure you want to delete <span
@@ -149,7 +149,7 @@
                         <td colspan="5" class="py-24 text-center">
                             <div class="flex flex-col items-center gap-4 text-slate-300">
                                 <span class="material-symbols-outlined text-7xl">draft</span>
-                                <p class="text-lg font-black tracking-tight text-slate-400">No stories found</p>
+                                <p class="text-lg font-black tracking-tight text-slate-400">No posts found</p>
                                 <a href="/dashboard/create"
                                     class="text-indigo-600 font-black uppercase tracking-widest text-xs hover:underline">Start
                                     writing now</a>

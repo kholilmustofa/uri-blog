@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        My Stories
+        My Posts
     </x-slot>
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

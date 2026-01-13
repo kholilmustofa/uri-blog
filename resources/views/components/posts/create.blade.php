@@ -48,14 +48,14 @@
     <div class="p-8 sm:p-12">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-                <h3 class="text-3xl font-black text-[#0f172a] tracking-tight">Write New Story</h3>
+                <h3 class="text-3xl font-black text-[#0f172a] tracking-tight">Write New Post</h3>
                 <p class="text-slate-500 mt-2 font-bold leading-relaxed">Fill in the details below to share your
                     perspective with the world.</p>
             </div>
             <div class="hidden md:block">
                 <span
                     class="px-4 py-2 bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-widest rounded-full">New
-                    Draft</span>
+                    Post</span>
             </div>
         </div>
 
@@ -100,7 +100,7 @@
                 <!-- Title -->
                 <div class="space-y-2">
                     <label for="title"
-                        class="text-[#0f172a] text-xs font-black uppercase tracking-widest block">{{ __('Story Title') }}</label>
+                        class="text-[#0f172a] text-xs font-black uppercase tracking-widest block">{{ __('Post Title') }}</label>
                     <input type="text" name="title" id="title"
                         class="w-full h-14 rounded-2xl bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
                         placeholder="Enter an engaging title..." autofocus value="{{ old('title') }}">
@@ -150,7 +150,7 @@
                 <button type="submit"
                     class="w-full sm:w-auto h-14 px-10 bg-indigo-600 text-white font-black rounded-2xl shadow-xl shadow-indigo-100 hover:bg-indigo-700 transform active:scale-95 transition-all flex items-center justify-center gap-3 uppercase tracking-widest text-xs">
                     <span class="material-symbols-outlined text-xl">publish</span>
-                    Publish Story
+                    Publish Post
                 </button>
                 <a href="/dashboard"
                     class="w-full sm:w-auto h-14 px-10 bg-slate-50 text-[#0f172a] font-black rounded-2xl hover:bg-slate-100 transition-all flex items-center justify-center uppercase tracking-widest text-xs">
@@ -166,7 +166,7 @@
     <script>
         const quill = new Quill('#editor', {
             theme: 'snow',
-            placeholder: 'Start writing your amazing story...',
+            placeholder: 'Start writing your amazing post...',
         });
 
         const initialContent = `{!! old('body') !!}`;

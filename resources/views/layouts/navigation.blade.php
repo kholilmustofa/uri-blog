@@ -16,7 +16,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                         class="text-sm font-black uppercase tracking-widest">
-                        {{ __('My Stories') }}
+                        {{ __('My Posts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')"
                         class="text-sm font-black uppercase tracking-widest">
