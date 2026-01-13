@@ -37,7 +37,7 @@
                                 <h3 class="text-lg font-black">Email Us</h3>
                                 <p class="text-slate-500 text-sm mt-1 font-bold">For general inquiries and support</p>
                                 <a class="block mt-2 font-black text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-widest text-xs"
-                                    href="mailto:hello@uriblog.com">hello@uriblog.com</a>
+                                    href="mailto:hello@uriblog.com">kholilmoestofa954@gmail.com</a>
                             </div>
                         </div>
 
@@ -51,8 +51,7 @@
                             <div>
                                 <h3 class="text-lg font-black">Office</h3>
                                 <p class="text-slate-500 text-sm mt-1 font-bold">Come visit our friendly team</p>
-                                <p class="mt-2 font-bold text-[#0f172a] leading-relaxed">123 Blog Street, Web City,
-                                    Digital State 90210</p>
+                                <p class="mt-2 font-bold text-[#0f172a] leading-relaxed">Universitas Alma Ata</p>
                             </div>
                         </div>
                     </div>
@@ -71,7 +70,7 @@
                                 </svg>
                             </a>
                             <a class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-white hover:border-indigo-600 hover:bg-indigo-600 transition-all"
-                                href="#">
+                                href="https://www.instagram.com/kh0lil_m/">
                                 <span class="sr-only">Instagram</span>
                                 <svg class="h-6 w-6 fill-current" viewbox="0 0 24 24">
                                     <path
@@ -80,7 +79,7 @@
                                 </svg>
                             </a>
                             <a class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-white hover:border-indigo-600 hover:bg-indigo-600 transition-all"
-                                href="#">
+                                href="https://linkedin.com/in/kholil-mustofa-25b669335">
                                 <span class="sr-only">LinkedIn</span>
                                 <svg class="h-6 w-6 fill-current" viewbox="0 0 24 24">
                                     <path
@@ -95,8 +94,7 @@
                 <!-- Right Column: Form -->
                 <div
                     class="lg:col-span-7 bg-white rounded-[3rem] border border-slate-100 p-8 md:p-12 shadow-2xl shadow-indigo-100/10">
-                    <form action="#" method="POST" class="flex flex-col gap-8">
-                        @csrf
+                    <form id="contactForm" class="flex flex-col gap-8">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <!-- Name Field -->
                             <div class="flex flex-col gap-3">
@@ -104,7 +102,7 @@
                                     for="name">Full Name</label>
                                 <input
                                     class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 h-16 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
-                                    id="name" placeholder="Ex. John Doe" type="text" required>
+                                    id="name" name="name" placeholder="Ex. John Doe" type="text" required>
                             </div>
                             <!-- Email Field -->
                             <div class="flex flex-col gap-3">
@@ -112,7 +110,7 @@
                                     for="email">Email Address</label>
                                 <input
                                     class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 h-16 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
-                                    id="email" placeholder="you@company.com" type="email" required>
+                                    id="email" name="email" placeholder="you@company.com" type="email" required>
                             </div>
                         </div>
                         <!-- Subject Field -->
@@ -121,7 +119,8 @@
                                 for="subject">Subject</label>
                             <input
                                 class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 h-16 px-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none font-bold"
-                                id="subject" placeholder="What is this regarding?" type="text" required>
+                                id="subject" name="subject" placeholder="What is this regarding?" type="text"
+                                required>
                         </div>
                         <!-- Message Field -->
                         <div class="flex flex-col gap-3">
@@ -129,7 +128,7 @@
                                 for="message">Message</label>
                             <textarea
                                 class="w-full rounded-2xl bg-[#f8fafc] border-transparent focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 p-6 text-[#0f172a] placeholder-slate-400 transition-all outline-none resize-none min-h-[180px] font-bold"
-                                id="message" placeholder="Type your message here..." rows="6" required></textarea>
+                                id="message" name="message" placeholder="Type your message here..." rows="6" required></textarea>
                         </div>
                         <!-- Submit Button -->
                         <div class="pt-4">
@@ -145,4 +144,25 @@
             </div>
         </div>
     </main>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Create mailto link
+            const mailtoLink = `mailto:kholilmoestofa954@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                `Name: ${name}\n` +
+                `Email: ${email}\n\n` +
+                `Message:\n${message}`
+            )}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+        });
+    </script>
 </x-layout>
