@@ -104,17 +104,24 @@ class FusekiService
 
             $response = Http::timeout($this->timeout)
                 ->asForm()
+                ->withHeaders([
+                    'Accept' => 'application/sparql-results+json'
+                ])
                 ->post($url, [
                     'query' => $sparql,
                 ]);
 
             if ($response->successful()) {
-                return $response->json();
+                $result = $response->json();
+                Log::debug('SPARQL query successful', [
+                    'bindings_count' => isset($result['results']['bindings']) ? count($result['results']['bindings']) : 0
+                ]);
+                return $result;
             }
 
             Log::error('SPARQL query failed', [
                 'status' => $response->status(),
-                'body' => $response->body(),
+                'body' => substr($response->body(), 0, 500),
             ]);
 
             return null;
@@ -247,7 +254,7 @@ WHERE {
         
         if ($search) {
             $search = addslashes($search);
-            $filters[] = "(regex(?title, \"{$search}\", \"i\") || regex(?content, \"{$search}\", \"i\"))";
+            $filters[] = "(regex(?title, \"{$search}\", \"i\") || regex(?content, \"{$search}\", \"i\") || regex(?authorName, \"{$search}\", \"i\") || regex(?categoryName, \"{$search}\", \"i\"))";
         }
         
         if ($category) {
@@ -312,15 +319,17 @@ LIMIT {$limit}
         $prefixes = $this->buildPrefixes();
         
         $sparql = $prefixes . "
-SELECT DISTINCT ?categoryName (COUNT(?post) as ?postCount)
+SELECT DISTINCT ?categoryName ?categorySlug ?categoryColor (COUNT(?post) as ?postCount)
 WHERE {
   ?category rdf:type :Category .
   ?category :categoryName ?categoryName .
+  OPTIONAL { ?category :categorySlug ?categorySlug }
+  OPTIONAL { ?category :categoryColor ?categoryColor }
   OPTIONAL {
     ?post :hasCategory ?category .
   }
 }
-GROUP BY ?categoryName
+GROUP BY ?categoryName ?categorySlug ?categoryColor
 ORDER BY ?categoryName
 ";
 

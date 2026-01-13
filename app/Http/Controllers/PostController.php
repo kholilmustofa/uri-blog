@@ -36,21 +36,78 @@ class PostController extends Controller
         
         if ($fusekiAvailable) {
             try {
+                Log::info('Attempting SPARQL search', [
+                    'search' => $search,
+                    'category' => $category,
+                    'author' => $author
+                ]);
+                
                 // Try SPARQL search
                 $sparqlPosts = $this->fusekiService->searchPosts($search, $category, $author, 50);
                 $sparqlCategories = $this->fusekiService->getAllCategories();
                 
+                Log::info('SPARQL search completed', [
+                    'posts_count' => $sparqlPosts ? count($sparqlPosts) : 0,
+                    'categories_count' => $sparqlCategories ? count($sparqlCategories) : 0
+                ]);
+                
                 // Only use SPARQL results if we got data
-                if ($sparqlPosts !== null) {
-                    $posts = $sparqlPosts;
-                    $categories = $sparqlCategories;
+                if ($sparqlPosts !== null && count($sparqlPosts) > 0) {
+                    // Transform SPARQL array to object structure
+                    $posts = collect($sparqlPosts)->map(function($item) {
+                        $categoryName = $item['categoryName']['value'] ?? 'Uncategorized';
+                        $publishedDate = isset($item['publishedDate']['value']) 
+                            ? \Carbon\Carbon::parse($item['publishedDate']['value']) 
+                            : now();
+                        
+                        return (object) [
+                            'title' => $item['title']['value'] ?? '',
+                            'slug' => $item['slug']['value'] ?? '',
+                            'content' => $item['content']['value'] ?? '',
+                            'body' => $item['content']['value'] ?? '', // Alias for content
+                            'image' => 'https://picsum.photos/seed/' . md5($item['title']['value'] ?? rand()) . '/800/600',
+                            'published_at' => $publishedDate,
+                            'created_at' => $publishedDate, // Use published date as created date
+                            'author' => (object) [
+                                'name' => $item['authorName']['value'] ?? 'Unknown',
+                                'username' => strtolower(str_replace(' ', '', $item['authorName']['value'] ?? 'unknown')),
+                                'avatar' => null // Will use ui-avatars.com in view
+                            ],
+                            'category' => (object) [
+                                'name' => $categoryName,
+                                'slug' => strtolower(str_replace(' ', '-', $categoryName)),
+                                'color' => $item['categoryColor']['value'] ?? '#6366f1'
+                            ]
+                        ];
+                    });
+                    
+                    // Transform categories
+                    $categories = collect($sparqlCategories)->map(function($item) {
+                        $categoryName = $item['categoryName']['value'] ?? '';
+                        return (object) [
+                            'name' => $categoryName,
+                            'slug' => $item['categorySlug']['value'] ?? strtolower(str_replace(' ', '-', $categoryName)),
+                            'color' => $item['categoryColor']['value'] ?? '#6366f1',
+                            'posts_count' => (int) ($item['postCount']['value'] ?? 0)
+                        ];
+                    });
+                    
+                    // Wrap in paginator for view compatibility
+                    $posts = new \Illuminate\Pagination\LengthAwarePaginator(
+                        $posts,
+                        $posts->count(),
+                        50, // items per page
+                        1, // current page
+                        ['path' => request()->url(), 'query' => request()->query()]
+                    );
+                    
                     $usingSemanticSearch = true;
                     
                     Log::info('Using semantic search (SPARQL)', [
                         'search' => $search,
                         'category' => $category,
                         'author' => $author,
-                        'results_count' => count($posts)
+                        'results_count' => $posts->count()
                     ]);
                 } else {
                     $fusekiAvailable = false; // Force fallback

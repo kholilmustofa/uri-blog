@@ -65,7 +65,7 @@
                 @if (request('category'))
                     <span
                         class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-[#0f172a] rounded-xl text-sm font-bold border border-indigo-100">
-                        Category: {{ $categories->firstWhere('slug', request('category'))->name ?? 'Unknown' }}
+                        Category: {{ request('category') }}
                         <a href="{{ request()->fullUrlWithQuery(['category' => null]) }}"
                             class="hover:text-red-500 transition-colors">
                             <span class="material-symbols-outlined text-lg">close</span>
@@ -112,7 +112,7 @@
                             <!-- Post Content -->
                             <div class="flex flex-col flex-1 p-8 gap-5 text-[#0f172a]">
                                 <div class="flex items-center justify-between">
-                                    <a href="/posts?category={{ $post->category->slug }}"
+                                    <a href="/posts?category={{ $post->category->name }}"
                                         class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest hover:opacity-80 transition-all"
                                         style="background-color: {{ $post->category->color }}20; color: {{ $post->category->color }}">
                                         {{ $post->category->name }}
@@ -128,7 +128,7 @@
                                         src="{{ $post->author->avatar ? asset('storage/' . $post->author->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($post->author->name) . '&color=4F46E5&background=EEF2FF' }}"
                                         alt="{{ $post->author->name }}">
                                     <div class="flex flex-col">
-                                        <a href="/posts?author={{ $post->author->username }}"
+                                        <a href="/posts?author={{ $post->author->name }}"
                                             class="text-xs font-black text-[#0f172a] hover:text-indigo-600 transition-colors uppercase tracking-widest">{{ $post->author->name }}</a>
                                     </div>
                                 </div>
@@ -185,10 +185,10 @@
                     <ul class="flex flex-col gap-2">
                         @foreach ($categories as $category)
                             <li>
-                                <a class="flex items-center justify-between p-3 rounded-2xl hover:bg-slate-50 group transition-all {{ request('category') === $category->slug ? 'bg-indigo-50' : '' }}"
-                                    href="/posts?category={{ $category->slug }}">
+                                <a class="flex items-center justify-between p-3 rounded-2xl hover:bg-slate-50 group transition-all {{ request('category') === $category->name ? 'bg-indigo-50' : '' }}"
+                                    href="/posts?category={{ $category->name }}">
                                     <span
-                                        class="text-slate-500 font-bold group-hover:text-[#0f172a] transition-colors {{ request('category') === $category->slug ? 'text-[#0f172a]' : '' }}">
+                                        class="text-slate-500 font-bold group-hover:text-[#0f172a] transition-colors {{ request('category') === $category->name ? 'text-[#0f172a]' : '' }}">
                                         {{ $category->name }}
                                     </span>
                                     <span
