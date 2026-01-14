@@ -270,7 +270,7 @@ WHERE {
         $filterString = !empty($filters) ? 'FILTER (' . implode(' && ', $filters) . ')' : '';
         
         $sparql = $prefixes . "
-SELECT DISTINCT ?post ?title ?slug ?content ?publishedDate ?authorName ?categoryName ?categoryColor
+SELECT DISTINCT ?post ?title ?slug ?content ?postImage ?publishedDate ?authorName ?categoryName ?categoryColor
 WHERE {
   ?post rdf:type :Post .
   ?post :postTitle ?title .
@@ -281,6 +281,7 @@ WHERE {
   ?author :authorName ?authorName .
   ?post :hasCategory ?category .
   ?category :categoryName ?categoryName .
+  OPTIONAL { ?post :postImage ?postImage }
   OPTIONAL { ?category :categoryColor ?categoryColor }
   {$filterString}
 }

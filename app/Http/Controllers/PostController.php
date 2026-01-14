@@ -60,12 +60,17 @@ class PostController extends Controller
                             ? \Carbon\Carbon::parse($item['publishedDate']['value']) 
                             : now();
                         
+                        // Use actual image from database if available, otherwise use placeholder
+                        $image = isset($item['postImage']['value']) && !empty($item['postImage']['value'])
+                            ? asset('storage/' . $item['postImage']['value'])
+                            : 'https://picsum.photos/seed/' . md5($item['title']['value'] ?? rand()) . '/800/600';
+                        
                         return (object) [
                             'title' => $item['title']['value'] ?? '',
                             'slug' => $item['slug']['value'] ?? '',
                             'content' => $item['content']['value'] ?? '',
                             'body' => $item['content']['value'] ?? '', // Alias for content
-                            'image' => 'https://picsum.photos/seed/' . md5($item['title']['value'] ?? rand()) . '/800/600',
+                            'image' => $image,
                             'published_at' => $publishedDate,
                             'created_at' => $publishedDate, // Use published date as created date
                             'author' => (object) [
