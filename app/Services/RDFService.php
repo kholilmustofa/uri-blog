@@ -29,9 +29,6 @@ class RDFService
         // Add prefixes
         $rdf = $this->generatePrefixes();
 
-        // Add blog instance
-        $rdf .= $this->generateBlogInstance();
-
         // Add authors (users)
         $rdf .= $this->generateAuthors();
 
@@ -61,22 +58,7 @@ class RDFService
         return $output;
     }
 
-    /**
-     * Generate blog instance
-     */
-    protected function generateBlogInstance(): string
-    {
-        $output = "# ===================================\n";
-        $output .= "# Blog Instance\n";
-        $output .= "# ===================================\n\n";
 
-        $output .= ":UriBlog rdf:type :Blog ;\n";
-        $output .= "    :blogName \"Uri Blog\" ;\n";
-        $output .= "    :blogDescription \"Your source for insightful articles and stories\" ;\n";
-        $output .= "    :blogURL \"" . config('app.url') . "\"^^xsd:anyURI .\n\n";
-
-        return $output;
-    }
 
     /**
      * Generate users
@@ -172,9 +154,6 @@ class RDFService
             $output .= "    :hasCategory :Category_{$categoryId} ;\n";
             
             $output = rtrim($output, " ;\n") . " .\n\n";
-
-            // Add blog contains post relationship
-            $output .= ":UriBlog :containsPost :Post_{$postId} .\n\n";
         }
 
         return $output;
