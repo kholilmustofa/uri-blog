@@ -18,10 +18,13 @@
                         class="text-sm font-black uppercase tracking-widest">
                         {{ __('My Posts') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')"
-                        class="text-sm font-black uppercase tracking-widest">
-                        {{ __('Categories') }}
-                    </x-nav-link>
+
+                    @if (auth()->user()->email === 'kholilmoestofa954@gmail.com')
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')"
+                            class="text-sm font-black uppercase tracking-widest">
+                            {{ __('Categories') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

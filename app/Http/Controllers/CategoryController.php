@@ -9,6 +9,19 @@ use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     /**
+     * Only allow specific admin to access categories
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->email !== 'kholilmoestofa954@gmail.com') {
+                abort(403, 'Unauthorized access to categories.');
+            }
+            return $next($request);
+        });
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
