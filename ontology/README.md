@@ -177,14 +177,14 @@ LIMIT 10
 #### Query 5: Get Verified Authors
 ```sparql
 PREFIX : <http://www.uriblog.com/ontology#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?authorName ?authorEmail ?authorUsername
+SELECT ?authorName ?authorEmail
 WHERE {
-  ?author a :User .
+  ?author a :Author .
   ?author :authorName ?authorName .
   ?author :authorEmail ?authorEmail .
-  ?author :authorUsername ?authorUsername .
-  ?author :emailVerified true .
+  ?author :emailVerified "true"^^xsd:boolean .
 }
 ```
 
