@@ -27,3 +27,4 @@ Thumbs.db
 /storage/app/rdf/*.ttl
 /storage/app/rdf/*.rdf
 /storage/app/rdf/*.owl
+/ontology/uri-blog-complete.owl
